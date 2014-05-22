@@ -1,23 +1,25 @@
 $(document).ready(function() {
-// Selecting div having class "module"
-  $("div.module").css("background-color", "yellow");
+// Select all image elements and log each image's 'alt' attribute
+  $('img').css('border', '2px solid blue').each(function() {
+    console.log($(this).attr('alt'));
+  });
 
-// Selecting third item in the unordered list "myList"
-  $("#myList li").eq(2).css("background-color", "red");
-  $("li[id = 'myListItem']").css("background-color", "red");
+// Select the search input field & traverse up to form & add a class to it.
+  var searchField = $("input[name = 'q']").css('background-color', 'yellow');
+  searchField.parent().addClass('searchForm');
 
-  // best use because of specific id on the list item.
-  $("#myListItem").css("background-color", "red");
+// Select the list item having class "current" inside #myList and remove that class, adding a class "current" to the next list item
+  var listItem = $("#myList li.current").css("background-color", "red");
+  listItem.removeClass("current");
+  listItem.next().addClass("current");
 
-// Selecting label for search input using attribute selector
-  $("label[for = 'q']").css("background-color", "green");
+// Select the select element inside #specials then traverse to the submit button.
+  var select = $("#specials").find("select").css("background-color", "green");
+  select.parent().next().children().css("border", "2px solid green");
 
-// No. of elements hidden in the page
-  alert("The total hidden elements are: \n " + $(":hidden").length);
-
-// No. of image elements having 'alt' attribute
-  alert("The total image elements having attribute 'alt' are: \n" + $("img[alt]").length);
-
-// All odd table-rows in the table
-  $("tr:odd").css("background-color", "blue");
+// Select the first list item in the #slideshow element adding class "current" to it, and then add a class of "disabled" to its sibling elements
+  var list = $("#slideshow li").first().addClass('current');
+  list.children().each(function() {
+    $(this).addClass("disabled");
+  });
 });
