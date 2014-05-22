@@ -11,23 +11,19 @@ $(document).ready(function() {
   console.log("odd list items removed from unordered list");
 
 // Add 'h2' and 'p' elements to the last div.module
-  var divContainer = $("div.module").last();
-  var newHeadingTag = $('<h2>').text("New heading Added");
-  var newParagraphTag = $('<p>').text("New paragraph Added");
-  divContainer.find("h2").after(newHeadingTag);
-  divContainer.find("p").after(newParagraphTag);
+  var newHeadingTag = $('<h2>').text("New Heading Added");
+  var newParagraphTag = $('<p>').text("New Paragraph Added");
+  $("div.module").last().append(newHeadingTag).append(newParagraphTag);
   console.log("h2 and p tags inserted in div container");
 
 // Add another option to the select element; give the option the value "Wednesday"
-  var optionTag = $("<option>").text("Wednesday");
-  optionTag.val("Wednesday");
-  $("option[value = 'tuesday']").after(optionTag);
+  var optionTag = $("<option>").val("Wednesday").text("Wednesday");
+  $("select[name = 'day']").append(optionTag);
   console.log("option tag inserted with new value in select element");
 
 // Add a new div.module to the page after the last one; put a copy of one of the existing images inside of it.
-  var newDiv = $("<div>").addClass('module');
+  var newDiv = $("<div>").addClass("module");
   $("div.module").last().after(newDiv);
-  var fruitImage = $("img[alt = fruit]").clone();
-  fruitImage.appendTo(newDiv);
+  $("img").eq(0).clone().appendTo(newDiv);
   console.log("new div container inserted with image after the last divContainer");
 });
