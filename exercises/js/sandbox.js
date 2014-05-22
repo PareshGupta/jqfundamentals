@@ -1,23 +1,33 @@
 $(document).ready(function() {
-// Selecting div having class "module"
-  $("div.module").css("background-color", "yellow");
+// Adding 5 new List Items to the end of unordered list '#myList'
+  for(var i = 1; i <= 5; i++) {
+    var newList = $("<li>").text("New List Item " + i);
+    $("#myList").append(newList);
+  }
+  console.log("new list items added in unordered list");
+  
+// Removing the odd list items from unordered list
+  $("#myList li:odd").remove();
+  console.log("odd list items removed from unordered list");
 
-// Selecting third item in the unordered list "myList"
-  $("#myList li").eq(2).css("background-color", "red");
-  $("li[id = 'myListItem']").css("background-color", "red");
+// Add 'h2' and 'p' elements to the last div.module
+  var divContainer = $("div.module").last();
+  var newHeadingTag = $('<h2>').text("New heading Added");
+  var newParagraphTag = $('<p>').text("New paragraph Added");
+  divContainer.find("h2").after(newHeadingTag);
+  divContainer.find("p").after(newParagraphTag);
+  console.log("h2 and p tags inserted in div container");
 
-  // best use because of specific id on the list item.
-  $("#myListItem").css("background-color", "red");
+// Add another option to the select element; give the option the value "Wednesday"
+  var optionTag = $("<option>").text("Wednesday");
+  optionTag.val("Wednesday");
+  $("option[value = 'tuesday']").after(optionTag);
+  console.log("option tag inserted with new value in select element");
 
-// Selecting label for search input using attribute selector
-  $("label[for = 'q']").css("background-color", "green");
-
-// No. of elements hidden in the page
-  alert("The total hidden elements are: \n " + $(":hidden").length);
-
-// No. of image elements having 'alt' attribute
-  alert("The total image elements having attribute 'alt' are: \n" + $("img[alt]").length);
-
-// All odd table-rows in the table
-  $("tr:odd").css("background-color", "blue");
+// Add a new div.module to the page after the last one; put a copy of one of the existing images inside of it.
+  var newDiv = $("<div>").addClass('module');
+  $("div.module").last().after(newDiv);
+  var fruitImage = $("img[alt = fruit]").clone();
+  fruitImage.appendTo(newDiv);
+  console.log("new div container inserted with image after the last divContainer");
 });
