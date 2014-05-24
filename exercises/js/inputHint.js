@@ -1,24 +1,21 @@
 $(document).ready(function() {
-// setting value of search input to the text of the label 
-  var labelSearch = $("label[for = 'q']");
-  var inputField = $("input[name = 'q']");
-  inputField.val(labelSearch.text());
+// removing the label element and savinn it's text 
+  var $hintText = $("label[for = 'q']").remove().text();
 
-// add class 'hint' to the search input
-  inputField.addClass("hint");
-
-// remove label element
-  labelSearch.remove();
+// setting the value of search input to the label text and adding class "hint"
+  $("input[name = 'q']").val($hintText).addClass("hint");
 
 // bind focus event to search input that removes the hint text & 'hint' class
-  inputField.focus(function() {
-    $(this).val("").removeClass("hint");
+  $('.input_text').focus(function() {
+    if($(this).hasClass('hint')) {
+      $(this).val("").removeClass("hint");
+    }
   });
 
 // bind blur event to search input restoring the hint text and class "hint"
-  inputField.blur(function() {
+  $('.input_text').blur(function() {
     if(!$(this).val()) {
-      $(this).val(labelSearch.text()).addClass("hint");
+      $(this).val($hintText).addClass("hint");
     } 
   });
 });
