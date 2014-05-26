@@ -1,0 +1,29 @@
+#main_container {
+  width: 80%;
+  height: auto;
+  margin: 20px auto;
+}
+
+.sub_containers {
+  width: 60%;
+  margin: 10px auto;
+  height: 100px;
+  border: 1px solid black;
+  text-align: center;
+  font: bold 18px sans-serif;
+  line-height: 100px;
+}
+
+#addItem {
+  width: 100px;
+  padding: 10px;
+  border-radius: 5px;
+  display: block;
+  float: right;
+  font-size: 16px;
+}
+
+.highlight {
+  background-color: gray;
+  border: 1px solid blue;
+}
