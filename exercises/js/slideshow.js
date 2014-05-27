@@ -1,40 +1,59 @@
-function Slideshow(slides, element) {
+function Slideshow() {
+  this.hideSlides = $("#slideshow li").hide();
+  this.prependSlides = $("#slideshow").prependTo("body");
   this.count = 0;
-  this.slides = slides;
-  this.slideText = element;
+  this.slides = $("#slideshow li:first");
+  // creating a element for slide counts
+  this.slideText = $("<p>").addClass("current").appendTo("#slideshow");
+  // getting the total slides
+  this.slideLength = $("#slideshow li").length;
+  this.getslideNumber();
+}
 
-  // method to slide images
-  this.slideshow = function(length) {
-    var that = this;
+
+Slideshow.prototype = {
+  constructor : Slideshow,
+  
+  // method to show slide number
+  getslideNumber : function() {
     this.count++;
-    this.slideCount = "<<< " + this.count + " / " + length + " >>>";
+    this.slideCount = "<<< " + this.count + " / " + this.slideLength + " >>>";
     this.slideText.text(this.slideCount);
-    this.slides.fadeIn(1000)
-               .delay(1500)
-               .fadeOut(function() { that.nextSlide(length) });
-  }
+    this.getSlideEffect();
+  },
 
-  // method to check the no of slide and move to next slide
-  this.nextSlide = function(length) {
-    if(this.count !== length) {
-      this.slides = this.slides.next();
+  // method to get the slideshow effect
+  getSlideEffect : function() {
+    var that = this;
+    that.slides.fadeIn(1000)
+               .delay(1500)
+               .fadeOut(function() { that.countSlide() });
+  },
+
+  // method to count the slides
+  countSlide : function() {
+    if(this.count !== this.slideLength) {
+      this.nextSlide();  
     } else {
-      this.slides = $("#slideshow li:first");
-      this.count = 0;
+      this.backToFirstSlide();
     }
-    this.slideshow(length);
+  },
+
+  // method to move to next slide
+  nextSlide : function() {
+    this.slides = this.slides.next();
+    this.getslideNumber();
+  },
+
+  // method to get back to the first slide
+  backToFirstSlide : function() {
+    this.slides = $("#slideshow li:first");
+    this.count = 0;
+    this.getslideNumber();
   }
 }
 
 $(function() {
-  var $slides = $("#slideshow li:first");
-  var $slideLength = $("#slideshow li").hide().length;
-  // creating a element for slide counts
-  var $slideTextElement = $("<p>").addClass("current").appendTo("#slideshow");
-  // prepending all images to the body 
-  $("#slideshow").prependTo("body");
-
   // new instance of the Slideshow function
-  var imageSlides = new Slideshow($slides, $slideTextElement);
-  imageSlides.slideshow($slideLength);    
+  new Slideshow();    
 });
