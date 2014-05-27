@@ -1,41 +1,54 @@
-// function to load the JSON file 
-function getJSON() {
-  var loadData = '';
-  $.ajax({ url : 'data/specials.json',
-    dataType : 'json',
-    async : false,
-    success : function(data) {
-      loadData = data;
-    }
-  })
-  .done(function() { console.log( "Successfully Loaded" ); })
-  .fail(function() { console.log("Error on Loading"); });
-  return loadData;
-}
+function LoadJSON() {
+  this.dataJSON = "";
 
-$(document).ready(function() {
-  var $dataJSON = '';
-  // Appending div element after form in "#special"
-  var $newDivElement = $('<div>').attr('id', 'targetDiv');
-  $('#specials form').after($newDivElement);
+  this.init = function() {
+    this.createDiv();
+    this.removeSubmitButton();
+    this.cachedData();
+    this.bindEvent();
+  }
 
-  // remove submit button in the form
-  $("input[type = 'submit']").parent().remove();
+  this.createDiv = function() {
+    $('<div />').attr('id', 'targetDiv').insertAfter('#specials form');
+  }
 
-  // Bind select elements to change event and load Ajax request
-  $("select[name = 'day']").bind('change', function() {
-    var $selectedOption = $(this).val();
-    if($dataJSON.length === 0) {
-      $dataJSON = getJSON();
-    }
-
-    if($selectedOption) {
-      $('#targetDiv').html($dataJSON[$selectedOption].title + '<br/>' + $dataJSON[$selectedOption].text);
-    } else {
-      $('#targetDiv').text('');
-    }
-  });
-});
+  this.removeSubmitButton = function() {
+    $('#specials li.buttons').remove();
+  }
   
+  this.readJSON = function() {
+    var that = this;
+    $.getJSON('data/specials.json')
+      .done(function(data) {
+        that.dataJSON = data;
+      })
+      .fail(function(data) {
+        alert("Could not read JSON");
+      })
+  }
+
+  this.bindEvent = function() {
+    var that = this;
+    $("select[name = 'day']").bind('change', function() {
+      var selectedDay = $(this).val(); 
+      if(selectedDay) {
+        $('#targetDiv').html(that.dataJSON[selectedDay].title + '<br/>' + that.dataJSON[selectedDay].text);
+      } else {
+        $('#targetDiv').text('');
+      }
+    });
+  }
+
+  this.cachedData = function() {
+    if(!this.dataJSON) {
+      this.readJSON();
+    }
+  } 
+}  
+
+$(function() {
+  var data = new LoadJSON();
+  data.init();
+});
 
 
