@@ -3,12 +3,12 @@ $(function() {
   $(".module").hide();
 
   //creating unordered list element
-  var $newUnorderedList = $("<ul>").attr("id", "moduleList")
+  var $newUnorderedList = $("<ul />").attr("id", "moduleList")
                                    .insertBefore(".module:first");
 
   // itereate to class "module" elements and adding new List item to the unordered list
   $(".module h2").each(function() {
-    $("<li>").data('module', $(this).parent().attr("id"))
+    $("<li />").data('module', $(this).parent().attr("id"))
              .text($(this).text())
              .appendTo($newUnorderedList);
   });
