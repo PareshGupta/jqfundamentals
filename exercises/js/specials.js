@@ -1,11 +1,11 @@
 function LoadJSON() {
-  this.dataJSON = "";
+  this.json = "";
 
   this.init = function() {
     this.createDiv();
     this.removeSubmitButton();
-    this.cachedData();
-    this.bindEvent();
+    this.cacheData();
+    this.bindEvents();
   }
 
   this.createDiv = function() {
@@ -15,40 +15,40 @@ function LoadJSON() {
   this.removeSubmitButton = function() {
     $('#specials li.buttons').remove();
   }
+}
   
-  this.readJSON = function() {
-    var that = this;
-    $.getJSON('data/specials.json')
-      .done(function(data) {
-        that.dataJSON = data;
-      })
-      .fail(function(data) {
-        alert("Could not read JSON");
-      })
-  }
+LoadJSON.prototype.readJSON = function() {
+  var that = this;
+  $.getJSON('data/specials.json')
+    .done(function(data) {
+      that.data = data;
+    })
+    .fail(function(data) {
+      alert("Could not read JSON");
+    })
+}
 
-  this.bindEvent = function() {
-    var that = this;
-    $("select[name = 'day']").bind('change', function() {
-      var selectedDay = $(this).val(); 
-      if(selectedDay) {
-        $('#targetDiv').html(that.dataJSON[selectedDay].title + '<br/>' + that.dataJSON[selectedDay].text);
-      } else {
-        $('#targetDiv').text('');
-      }
-    });
-  }
-
-  this.cachedData = function() {
-    if(!this.dataJSON) {
-      this.readJSON();
+LoadJSON.prototype.bindEvents = function() {
+  var that = this;
+  $("select[name = 'day']").bind('change', function() {
+    var selectedDay = $(this).val(); 
+    if(selectedDay) {
+      $('#targetDiv').html(that.data[selectedDay].title + '<br/>' + that.data[selectedDay].text);
+    } else {
+      $('#targetDiv').text('');
     }
-  } 
-}  
+  });
+}
+
+LoadJSON.prototype.cacheData = function() {
+  if(!this.data) {
+    this.readJSON();
+  }
+} 
 
 $(function() {
-  var data = new LoadJSON();
-  data.init();
+  var JSON = new LoadJSON();
+  JSON.init();
 });
 
 
