@@ -1,5 +1,8 @@
-function LoadJSON() {
+function LoadJSON(url, element) {
+  this.url = url;
+  this.selectElement = element;
   this.json = "";
+  this.data = "";
 
   this.init = function() {
     this.createDiv();
@@ -19,7 +22,7 @@ function LoadJSON() {
   
 LoadJSON.prototype.readJSON = function() {
   var that = this;
-  $.getJSON('data/specials.json')
+  $.getJSON(this.url)
     .done(function(data) {
       that.data = data;
     })
@@ -30,7 +33,7 @@ LoadJSON.prototype.readJSON = function() {
 
 LoadJSON.prototype.bindEvents = function() {
   var that = this;
-  $("select[name = 'day']").bind('change', function() {
+  this.selectElement.bind('change', function() {
     var selectedDay = $(this).val(); 
     if(selectedDay) {
       $('#targetDiv').html(that.data[selectedDay].title + '<br/>' + that.data[selectedDay].text);
@@ -47,7 +50,9 @@ LoadJSON.prototype.cacheData = function() {
 } 
 
 $(function() {
-  var JSON = new LoadJSON();
+  var URL = 'data/specials.json';
+  var $selectElement = $("select[name = 'day']");
+  var JSON = new LoadJSON(URL, $selectElement);
   JSON.init();
 });
 
