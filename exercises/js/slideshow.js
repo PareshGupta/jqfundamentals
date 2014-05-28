@@ -17,7 +17,7 @@ Slideshow.prototype = {
   // method to start the slideshow effect
   startSlideShow : function() {
     var that = this;
-    this.showSlideNumber();
+    that.showSlideNumber();
     that.firstSlide.fadeIn(1000)
                    .delay(1500)
                    .fadeOut(function() { that.countSlide() });
