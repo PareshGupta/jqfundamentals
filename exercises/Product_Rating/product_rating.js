@@ -30,8 +30,8 @@ function ProductRating() {
       }
       $table.appendTo("body");
     }
-    that.bindEvent();
-    that.highlightProduct();
+    that.bindEventOnRadioButtons();
+    that.bindEventOnProducts();
   }
 
   // method to set the table Rows and Columns
@@ -45,8 +45,8 @@ function ProductRating() {
     }
   }
 
-  // method to highlight the selected product
-  this.highlightProduct = function() {
+  // binding events on products when highlighted
+  this.bindEventOnProducts = function() {
     var that = this;
     $(".products").on("click", function() {
       $(".products").removeClass("highlight");
@@ -54,22 +54,23 @@ function ProductRating() {
       // getting the row index
       that.rowIdx = $("tr").index($(this).parent());
 
-      // finding index of radio button
-      var $checkedRadioButton = $(this).parent().find("input:checked");
+      $checkedRadioButton = $(this).parent().find("input[type = 'radio']:checked");
       if($checkedRadioButton.length) {
-        var $radioIdx = $(this).nextAll().index($checkedRadioButton.parent());
-        $(".ratings").removeClass("highlight").eq($radioIdx).addClass("highlight");
-        $checkedRadioButton.prop("checked", true);
-        that.highlightRating();
+        // find index of the checked radio button and highlighting the corresponding rating
+        var radioIdx = $(this).nextAll().index($checkedRadioButton.parent());
+        $(".ratings").removeClass("highlight").eq(radioIdx).addClass("highlight");
+      } else if($(".ratings.highlight").length) {
+        // find index of the highlighted rating and checking the corresponding radio button
+        var highlightedRatingIdx = $(".ratings").index($(".ratings.highlight"));
+        $(this).siblings().eq(highlightedRatingIdx).children().prop("checked", true);
       } else {
-        that.highlightRating();
-        that.checkUncheckRadioButton();
+        that.bindEventOnRatings(); 
       }
     });
   }
 
-  // method to highlight the product's rating
-  this.highlightRating = function() {
+  // binding event on ratings's when highlighted
+  this.bindEventOnRatings = function() {
     var that = this;
     $(".ratings").on("click", function() {
       $(".ratings").removeClass("highlight");
@@ -83,19 +84,13 @@ function ProductRating() {
   // method to check the radio button
   this.checkUncheckRadioButton = function() {
     // unchecking all radio buttons in the row
-    $('tr').eq(this.rowIdx)
-           .find('input')
-           .prop("checked", false);
+    $("tr").eq(this.rowIdx).find('input').prop("checked", false);
     // checking the radio button
-    $('tr').eq(this.rowIdx)
-           .find('td')
-           .eq(this.columnIdx)
-           .children()
-           .prop("checked", true);
+    $("tr").eq(this.rowIdx).find('td').eq(this.columnIdx).children().prop("checked", true);
   }
 
   // method to highlight product and rating on clicking the radio button
-  this.bindEvent = function() {
+  this.bindEventOnRadioButtons = function() {
     $("tr:not(:first)").each(function() {
       var $that = $(this);
       // bindind change event on radio buttons
