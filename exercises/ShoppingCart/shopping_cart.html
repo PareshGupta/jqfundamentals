@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" type="text/css" href="shopping_cart.css">
+  </head>
+  <body>
+    <div id="main-container">
+      <ul id="tabs">
+        <li id="product-list" class="highlight">Products</li>
+        <li id="products-selected"></li>
+      </ul>
+    </div>
+    
+    <div id="mycart">
+      <table>
+        <tr>
+          <th width="500px">Products</th>
+          <th width="150px">Price</th>
+          <th width="50px">Quantity</th>
+          <th width="150px">Subtotal</th>
+          <th width="150px">Action</th>
+        </tr>
+      </table>
+    </div>
+    
+    <div id="total"> 
+      <h3>Total:<input id="total-price" type="text" readonly></h3>
+      <input id= "total" type="button" value="Checkout">
+    </div>
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+    </script>
+    <script src="shopping_cart.js"></script>
+  </body>
+</html>

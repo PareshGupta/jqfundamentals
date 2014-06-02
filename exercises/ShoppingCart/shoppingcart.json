@@ -1,0 +1,24 @@
+{ 
+  "Apple" : [ "macbook.jpeg", 
+              "Apple Macbook Pro MA464LL/A 15.4\" Notebook PC",
+              "Category : Computers", 
+              "the intel Core Duo powering Macbook Pro is actually two processors built into a single chip.", 
+              "Price : 2299.99" ],
+
+  "Sony" : [ "SonyVaio.jpg",
+             "Sony VAIO 11.1\" Notebook PC", 
+             "Category : Computers",
+             "Weighing in at just an amazing 2.84 pounds and offering a sleek, durable, carbon fiber case in charcoal black. And with 4 - 10 hours of standard battery life, it has the stamina to power through your most demanding applications.",
+             "Price : 2699.99" ],
+
+  "Canon" : [ "canon.jpg", 
+              "Canon Digital Rebel XT 8MP Digital SLR Camera", 
+              "Category : Cameras", 
+              "Canon EOS digital Rebel XT SLR adds resolution, speed, extra creative central and enhance confort in the hand to one of the smallest and highest digital cameras in its class",
+              "Price : 559.99" ],
+
+  "Category" : [ "Computers", "Cameras" ]
+
+}
+
+  

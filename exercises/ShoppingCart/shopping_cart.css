@@ -1,0 +1,131 @@
+div.products {
+  width: 1000px;
+  height: 130px;
+  outline: 1px solid black;
+  padding: 10px;
+  /*display: none;*/
+}
+
+#mycart {
+  width: 1000px;
+  height: auto;
+  outline: 1px solid black;
+  padding: 10px;
+  display: none;
+  /*background-color: #ececec;*/
+}
+
+#tabs {
+  list-style-type: none;
+}
+
+#tabs li {
+  display: inline-block;
+  border: 1px solid black;
+  padding: 10px;
+  margin-right: 10px;
+  font: bold 18px sans-serif;
+}
+
+img.productImage1 {
+  width: 110px;
+  height: 110px;
+  float: left;
+  line-height: 130px;
+  vertical-align: middle;
+  border: 1px solid black;
+}
+
+img.productImage2 {
+  width: 80px;
+  height: 80px;
+  float: left;
+  line-height: 130px;
+  vertical-align: middle;
+  border: 1px solid black;
+}
+
+h2 {
+  font-size: 14px;
+  margin: 3px;
+}
+
+p {
+  font-size: 14px;
+  color: gray;
+  margin: 3px;
+}
+
+input[type = "text"] {
+  width: 20px;
+  display: inline-block;  
+  margin-top: 30px;
+}
+
+span.details {
+  width: 500px;
+  float: left;
+  margin-left: 20px;
+}
+
+#quantity {
+  margin-left: 80px;
+  line-height: 100px;
+  vertical-align: middle;
+  color: gray;
+}
+
+input[type = "button"] {
+  margin-left: 10px;
+  line-height: 100px;
+  vertical-align: middle;
+  color: gray; 
+}
+
+/* total div */
+#total {
+  text-align: right;
+  width: 1000px;
+  height: 60px;
+  padding: 10px;
+}
+
+#total h3 {
+  display: inline-block;
+}
+
+#total input[type = "button"] {
+  width: 150px;
+  height: 30px;
+  text-align: center;
+  font-size: 18px;
+  padding: 0px 5px;
+  background-color: gray;
+  color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+#total-price {
+  margin-left: 10px;
+  width: 150px;
+  height: 20px;
+}
+
+/*css for My Cart tab*/
+
+table, tr, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+th {
+  font-size: 14px;
+  color: gray;
+  padding: 5px;
+}
+
+.highlight {
+  background-color: gray;
+}
