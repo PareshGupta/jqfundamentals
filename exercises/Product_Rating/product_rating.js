@@ -49,20 +49,14 @@ function ProductRating() {
   this.bindEventOnProducts = function() {
     var that = this;
     $(".products").on("click", function() {
-      $(".products").removeClass("highlight");
+      $(".products, .ratings").removeClass("highlight");
       $(this).addClass("highlight");
-      // getting the row index
-      that.rowIdx = $("tr").index($(this).parent());
-
+      // getting the checkedRadioButton 
       $checkedRadioButton = $(this).parent().find("input[type = 'radio']:checked");
       if($checkedRadioButton.length) {
         // find index of the checked radio button and highlighting the corresponding rating
         var radioIdx = $(this).nextAll().index($checkedRadioButton.parent());
-        $(".ratings").removeClass("highlight").eq(radioIdx).addClass("highlight");
-      } else if($(".ratings.highlight").length) {
-        // find index of the highlighted rating and checking the corresponding radio button
-        var highlightedRatingIdx = $(".ratings").index($(".ratings.highlight"));
-        $(this).siblings().eq(highlightedRatingIdx).children().prop("checked", true);
+        $(".ratings").eq(radioIdx).addClass("highlight");
       } else {
         that.bindEventOnRatings(); 
       }
@@ -71,22 +65,19 @@ function ProductRating() {
 
   // binding event on ratings's when highlighted
   this.bindEventOnRatings = function() {
-    var that = this;
     $(".ratings").on("click", function() {
       $(".ratings").removeClass("highlight");
       $(this).addClass("highlight");
       // getting the column index
-      that.columnIdx = $("td").index($(this));
-      that.checkUncheckRadioButton();
+      var columnIdx = $("td").index($(this));
+      if($(".products.highlight").length) {
+        $(".products.highlight").siblings()
+                                .find("input")
+                                .prop("checked", false)
+                                .eq(columnIdx - 1)
+                                .prop("checked", true);
+      } 
     });
-  }
-
-  // method to check the radio button
-  this.checkUncheckRadioButton = function() {
-    // unchecking all radio buttons in the row
-    $("tr").eq(this.rowIdx).find('input').prop("checked", false);
-    // checking the radio button
-    $("tr").eq(this.rowIdx).find('td').eq(this.columnIdx).children().prop("checked", true);
   }
 
   // method to highlight product and rating on clicking the radio button
@@ -109,6 +100,7 @@ function ProductRating() {
         $that.find("td.products").addClass("highlight");
       });
     });
+    this.bindEventOnRatings();
   }
 }
 
