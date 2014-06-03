@@ -20,14 +20,19 @@ function ProductRating() {
 
   // method to create Rows and Columns in the table
   this.createTable = function() {
+    // [FIX] use var before declaring variable
     $table = $("<table/>");
     var that = this;
+    // [FIX] loop is running more than it should run
     for(var i = 0; i <= that.cacheData["drinks"].length; i++) {
+      // [FIX] don't use row as function property, it shud be a simple variable
       that.row = $("<tr/>").appendTo($table);
       for(var j = 0; j <= that.cacheData["ratings"].length; j++) {
+      // [FIX] don't use row as function property, it shud be a simple variable
         that.column = $("<td/>").appendTo(that.row);
         that.setupTable(i, j);
       }
+      // [FIX] append table should be present out of the loop
       $table.appendTo("body");
     }
     that.bindEventOnRadioButtons();
@@ -58,6 +63,7 @@ function ProductRating() {
         var radioIdx = $(this).nextAll().index($checkedRadioButton.parent());
         $(".ratings").eq(radioIdx).addClass("highlight");
       } else {
+        // [FIX] eventlistener is getting attached multiple times, instead it should attach once
         that.bindEventOnRatings(); 
       }
     });
@@ -87,11 +93,14 @@ function ProductRating() {
       // bindind change event on radio buttons
       $that.find("input[type = 'radio']").on("change", function() {
         // getting checked radio button index
+        // [FIX] fetch only checked radio buttons
         var radioIdx = $that.find("input[type = 'radio']")
                             .prop("checked", false)
                             .index($(this));
-        $(this).prop("checked", true);         
+        $(this).prop("checked", true);
+        
         // highlighting the rating tab corresponding to the radio button
+        // [FIX] extract out code to highlight columns in a diff function
         $("td.ratings").removeClass("highlight")
                        .eq(radioIdx)
                        .addClass("highlight");
@@ -100,6 +109,8 @@ function ProductRating() {
         $that.find("td.products").addClass("highlight");
       });
     });
+    
+    // [FIX] this is getting called on page load
     this.bindEventOnRatings();
   }
 }
