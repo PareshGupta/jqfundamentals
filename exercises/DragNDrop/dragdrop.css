@@ -1,0 +1,20 @@
+ul {
+  list-style-type: none;
+  width: 200px;
+  height: 150px;
+  border: 1px solid black;
+  float: left;
+  overflow: scroll;
+  margin-right: 20px;
+  padding: 10px;
+}
+
+li {
+  width: 150px;
+  font: bold 14px sans-serif;
+  border: 1px solid gray;
+  background-color: #ececec;
+  text-align: center;
+  padding: 1px;
+  margin: 0px auto;
+}
