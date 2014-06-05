@@ -4,8 +4,8 @@ function OnlineStore() {
   
   this.init = function() {
     this.getJSON();
-    this.showProducts();
-    this.showMyCart();
+    this.productTab();
+    this.myCartTab();
   }
 
   // method to get the json
@@ -23,23 +23,24 @@ function OnlineStore() {
 
   // method to setting up the product div's
   this.setup = function() {
-    this.settingProducts();
+    this.buildingProducts();
     this.addProductsToCart();
     this.removeProduct();
     this.changeQuantity();
   }
 
   // method to create the elements in the div
-  this.settingProducts = function() {
-    var company = Object.keys(this.cacheData);
-    for (var i = 0; i < company.length; i++) {
+  this.buildingProducts = function() {
+    for(var company in this.cacheData) {
       var $div = $("<div/>", { class : "products" });
       var $span = $("<span>", { class : "details" });
-      $("<img>", { class : 'productImage1'}).attr("src", this.cacheData[company[i]]["image"]).appendTo($div);
-      $("<h2/>", { class : 'product-name'}).text(this.cacheData[company[i]]["productName"]).appendTo($span);
-      $("<p/>").text("Category : " + this.cacheData[company[i]]["category"]).appendTo($span);
-      $("<p/>").text(this.cacheData[company[i]]["details"]).appendTo($span);
-      $("<h2/>", { class : 'price'}).text("Price : " + this.cacheData[company[i]]["price"]).appendTo($span);
+      $("<img>", { class : 'productImage1'}).attr("src", this.cacheData[company]["image"]).appendTo($div);
+      $("<h2/>", { class : 'product-name'}).text(this.cacheData[company]["productName"]).appendTo($span);
+      $("<p/>").text("Category : " + this.cacheData[company]["category"]).appendTo($span);
+      $("<p/>").text(this.cacheData[company]["details"]).appendTo($span);
+      $("<h2/>", { class : 'price'}).text("Price : " + this.cacheData[company]["price"])
+                                    .data("price", this.cacheData[company]["price"])
+                                    .appendTo($span);
       $("<span>", { class : "quantity"}).text("Quantity : ").appendTo($div);
       $("<input>", { type : 'text', val : "1" }).appendTo($div);
       $("<input>", { type : 'button', value : "Add to Cart" }).appendTo($div);
@@ -49,22 +50,18 @@ function OnlineStore() {
   }
 
   // method to bind click event on the product tab
-  this.showProducts = function() {
-    $("#product-list").on("click", function() {
-      $(this).addClass("highlight")
-             .siblings("#products-selected")
-             .removeClass("highlight");
+  this.productTab = function() {
+    $("#product-tab").on("click", function() {
+      $(this).addClass("highlight").next().removeClass("highlight");
       $(".products").css("display", "block");
       $("#mycart").css("display", "none");
     });
   }
 
   // method to bind event on the MyCart tab
-  this.showMyCart = function() {
-    $("#products-selected").on("click", function() {
-      $(this).addClass("highlight")
-             .siblings("#product-list")
-             .removeClass("highlight");
+  this.myCartTab = function() {
+    $("#mycart-tab").on("click", function() {
+      $(this).addClass("highlight").prev().removeClass("highlight");
       $("#mycart").css("display", "block");
       $(".products").css("display", "none");
     });
@@ -74,7 +71,7 @@ function OnlineStore() {
   this.addProductsToCart = function() {
     var that = this;
     $(".products input[type = 'button']").click(function() {
-      var cachePrice = $(this).siblings(".details").find(".price").text().replace("Price :", "");
+      var cachePrice = $(this).siblings(".details").find(".price").data("price");
       var cacheQuantity = $(this).siblings("input").val();
       // calculating total and add the value to the total
       var totalPrice = parseFloat((cachePrice * cacheQuantity).toFixed(2));
@@ -127,7 +124,7 @@ function OnlineStore() {
     $("table input[type = 'text']").each(function() {
       that.quantity += parseInt($(this).val());
     });
-    $("#products-selected").text("My Cart (" + that.quantity + ")" );
+    $("#mycart-tab").text("My Cart (" + that.quantity + ")" );
   }
 
   // method to remove the product from the cart
