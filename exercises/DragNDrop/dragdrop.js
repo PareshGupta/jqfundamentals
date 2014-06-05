@@ -1,7 +1,10 @@
+// [FIX] use appropriate var/function name
+
 function CountryNames() {
 
   this.bindEvent = function() {
     var that = this;
+    // [SUGGESTION] Move to separate functions
     $("#countrylist1").on("mouseover", "li", function() {
       that.dragAndDrop("#countrylist1", "#countrylist2");
     });
@@ -13,6 +16,7 @@ function CountryNames() {
 
   // method to drag and drop the countries 
   this.dragAndDrop = function(list1, list2) {
+    // [SUGGESTION] Move to separate functions
     $(list1).find("li").draggable({
       snap : true,
       cursor : "move",
