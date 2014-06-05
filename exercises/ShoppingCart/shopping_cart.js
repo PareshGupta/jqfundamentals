@@ -1,3 +1,7 @@
+// [FIX] use jquery show-hide instead of .css('display', 'block/none')
+// [FIX] Use proper var/function names 
+// [FIX] try to fetch elements using ids/class attrs instead of type/name
+
 function OnlineStore() {
   this.cacheData = '';
   this.total = 0;
@@ -32,6 +36,7 @@ function OnlineStore() {
   // method to create the elements in the div
   this.buildingProducts = function() {
     for(var company in this.cacheData) {
+      // [FIX] put comments in between so that it can checked in parts what is progressively building
       var $div = $("<div/>", { class : "products" });
       var $span = $("<span>", { class : "details" });
       $("<img>", { class : 'productImage1'}).attr("src", this.cacheData[company]["image"]).appendTo($div);
@@ -138,6 +143,7 @@ function OnlineStore() {
 
   // method to recalculate total price after removing the product
   this.recalculateTotal = function(obj) {
+    // [FIX] instead of using text, use data-attrs
     var subTotal = parseFloat(obj.prev().text());
     this.total = this.total - subTotal;
     $("#total-price").val(this.total.toFixed(2));
