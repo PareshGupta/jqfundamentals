@@ -1,0 +1,8 @@
+{
+  "Brands" : [ "Brand A", "Brand B", "Brand C", "Brand D" ],
+
+  "Colors" : [ "Yellow", "Red", "Green", "Blue"],
+
+  "value" : ["a", "b", "c", "d"]
+
+}
