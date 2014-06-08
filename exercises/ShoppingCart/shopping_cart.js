@@ -1,6 +1,4 @@
-// [FIX] use jquery show-hide instead of .css('display', 'block/none')
 // [FIX] Use proper var/function names 
-// [FIX] try to fetch elements using ids/class attrs instead of type/name
 
 function OnlineStore() {
   this.cacheData = '';
@@ -36,19 +34,25 @@ function OnlineStore() {
   // method to create the elements in the div
   this.buildingProducts = function() {
     for(var company in this.cacheData) {
-      // [FIX] put comments in between so that it can checked in parts what is progressively building
+      // creating a div and span element
       var $div = $("<div/>", { class : "products" });
       var $span = $("<span>", { class : "details" });
+      // creating image tag 
       $("<img>", { class : 'productImage1'}).attr("src", this.cacheData[company]["image"]).appendTo($div);
+      // creating heading tag for the product name 
       $("<h2/>", { class : 'product-name'}).text(this.cacheData[company]["productName"]).appendTo($span);
+      // creating paragraph tag for the details of the products
       $("<p/>").text("Category : " + this.cacheData[company]["category"]).appendTo($span);
       $("<p/>").text(this.cacheData[company]["details"]).appendTo($span);
+      // creating heading tag for the price of the product
       $("<h2/>", { class : 'price'}).text("Price : " + this.cacheData[company]["price"])
                                     .data("price", this.cacheData[company]["price"])
                                     .appendTo($span);
+      // creating span and input tag for the quantity
       $("<span>", { class : "quantity"}).text("Quantity : ").appendTo($div);
       $("<input>", { type : 'text', val : "1" }).appendTo($div);
-      $("<input>", { type : 'button', value : "Add to Cart" }).appendTo($div);
+      //  creating input button tag for adding items to cart
+      $("<input>", { class : 'addItems', type : 'button', value : "Add to Cart" }).appendTo($div);
       $span.appendTo($div);
       $div.appendTo("#main-container");
     }
@@ -58,8 +62,8 @@ function OnlineStore() {
   this.productTab = function() {
     $("#product-tab").on("click", function() {
       $(this).addClass("highlight").next().removeClass("highlight");
-      $(".products").css("display", "block");
-      $("#mycart").css("display", "none");
+      $(".products").show();
+      $("#mycart").hide();
     });
   }
 
@@ -67,15 +71,15 @@ function OnlineStore() {
   this.myCartTab = function() {
     $("#mycart-tab").on("click", function() {
       $(this).addClass("highlight").prev().removeClass("highlight");
-      $("#mycart").css("display", "block");
-      $(".products").css("display", "none");
+      $("#mycart").show()
+      $(".products").hide();
     });
   }
 
   // method to bind event on button "Add to MyCart"
   this.addProductsToCart = function() {
     var that = this;
-    $(".products input[type = 'button']").click(function() {
+    $(".addItems").click(function() {
       var cachePrice = $(this).siblings(".details").find(".price").data("price");
       var cacheQuantity = $(this).siblings("input").val();
       // calculating total and add the value to the total
@@ -102,10 +106,10 @@ function OnlineStore() {
     $("<td>").appendTo($productRow).text(price);
 
     // third column quantity
-    $("<td>").html($("<input>", { type : "text"}).val(quantity)).appendTo($productRow);
+    $("<td>").html($("<input>", { type : "text"}).val(quantity).addClass("productQuantity")).appendTo($productRow);
 
     // fourth column subTotal
-    $("<td>", { class : 'subtotal' }).text(subtotal).appendTo($productRow);
+    $("<td>", { class : 'subtotal' }).text(subtotal).data("subtotal", subtotal).appendTo($productRow);
 
     // fifth column 
     $("<button>").text("Remove").appendTo($productRow);
@@ -126,7 +130,7 @@ function OnlineStore() {
   this.checkTotalQuantity = function() {
     var that = this;
     that.quantity = 0;
-    $("table input[type = 'text']").each(function() {
+    $(".productQuantity").each(function() {
       that.quantity += parseInt($(this).val());
     });
     $("#mycart-tab").text("My Cart (" + that.quantity + ")" );
@@ -153,7 +157,7 @@ function OnlineStore() {
   // method to change quantity from the My Cart tab
   this.changeQuantity = function() {
     var that = this;
-    $("table").on("change", "input[type = 'text']", function() {
+    $("table").on("change", ".productQuantity", function() {
       that.checkTotalQuantity();
       that.recalculateSubTotal($(this));
     }) 
