@@ -61,19 +61,6 @@ function Categories() {
     $("<input>", { type : "radio", name : "toggle", id : "available", value : "0" }).appendTo($available);
     $("<label>", { for : "available", text : "Available Products" }).appendTo($available);
   }
-
-  // binding event on radio button
-  this.bindEventOnRadio = function() {
-    var that = this;
-    $("input[type = 'radio']").on("click", function() {
-      if($("#all").prop("checked")) {
-        $("img").show();
-      } else {
-        $("img").hide();
-        $("img.0").show();
-      }
-    });
-  }
 }
 
 Categories.prototype = new ProductGrid();
@@ -118,6 +105,18 @@ function Filter() {
   this.init = function() {
     this.getFilterData();
     this.getProductData();
+  }
+
+  this.bindEventOnRadio = function() {
+    var that = this;
+    // var $soldOut = '';
+    $("input[type = 'radio']").on("click", function() {
+      if($("#available").prop("checked")) {
+        $soldOut = $("img:visible").filter(".1").hide();
+      } else {
+        $soldOut.show();
+      }
+    });
   }
 
   // binding event on all checkboxes
