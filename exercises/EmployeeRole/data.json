@@ -1,0 +1,5 @@
+{
+	"employees" : ["Paresh", "Sameer", "Rahul"],
+
+	"roles" : ["Android", "ROR", "iOS"]
+}	
