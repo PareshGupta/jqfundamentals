@@ -10,6 +10,14 @@
 	padding: 0px;
 	text-align: center;
 	display: inline-block;
+	position: fixed;
+	top: 50px;
+}
+
+#employees .ui-draggable {
+	width: 100px;
+	height: 25px;
+	margin: 0px auto;
 }
 
 			/*Roles Section*/
@@ -19,6 +27,7 @@
 	border: 1px solid black;
 	display: inline-block;
 }
+
 
 .role-header {
 	width: 180px;
@@ -49,6 +58,8 @@
 	height: auto;
 	border: 1px solid black;
 	display: inline-block;
+	position: absolute;
+	left: 500px;
 }
 
 #name-header, #todo-header, #roles h4 {
@@ -66,7 +77,6 @@
 	height: auto;
 	outline: 1px solid black;
 	margin: 0px auto;
-	padding-bottom: 5px;
 }
 
 .sub-container {
@@ -78,8 +88,9 @@
 }
 
 #to-dos p {
+	height: 30px;
 	background-color: #ececec;
-	padding: 3px;
+	line-height: 30px;
 	margin:5px;
 }
 
@@ -88,6 +99,7 @@
 	height: 15px;
 	float: right;
 	margin-right: 25px;
+	margin-top: 5px;
 }
 
 #to-dos span {	
