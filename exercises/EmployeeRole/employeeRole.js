@@ -67,8 +67,10 @@ var App = {
 		$("#roles").on('click', '.remove', function() {
 			var roleData = $(this).parents(".ui-droppable").attr("data-role");
 			var nameData = $(this).parent().attr("data-name");
-			$(this).parent().remove();
-			$("div[data-role = '" + roleData + "']").find($("[data-name ='" + nameData + "']")).remove();
+			if(confirm("Press Ok to Delete") == true) {
+				$(this).parent().remove();
+				$("div[data-role = '" + roleData + "']").find($("[data-name ='" + nameData + "']")).remove();	
+			}
 		});
 	}
 
