@@ -86,14 +86,14 @@ Employee.prototype.init = function() {
 }
 
 Employee.prototype.add = function() {
-	$("<li>", { text : this.name }).appendTo($("#employees"));
+	$("<li>", { text : this.name }).attr("data-name", this.name).appendTo($("#employees"));
 }
 
 Employee.prototype.draggable = function() {
 	$("#employees li:not(:first)").draggable({
 		snap : true,
 		cursor : "move",
-		helper : "clone",
+		helper : "clone"
 	}).disableSelection();
 }
 
@@ -118,11 +118,10 @@ Role.prototype.droppable = function() {
 	var that = this;
 	$("#roles ul").droppable({
 		drop : function(event, ui) {
-			if($(this).find($("li", { class : ui.draggable.text()})).length > 1) {  // issue 1 : if condition not working
+			if($(this).find($("[data-name='" + ui.draggable.attr("data-name") + "']")).length >=1) { 
 				return false;
 			} else {
 				var employeeName = ui.draggable.clone()
-																	 		 .removeClass("ui-draggable")
 																	 		 .attr("data-name", ui.draggable.text())
 																	 		 .appendTo($(this));
 				$("<img>", { class : "remove", src : "cross.png"}).appendTo(employeeName).hide();

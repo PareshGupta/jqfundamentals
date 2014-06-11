@@ -1,9 +1,15 @@
+#employees, #roles, #to-dos {
+	margin: 10px 20px;
+}
 			/*Employee Section*/
 #employees {
 	width: 200px ;
 	min-height: 150px;
 	border: 1px solid black;	
 	list-style-type: none;
+	padding: 0px;
+	text-align: center;
+	display: inline-block;
 }
 
 			/*Roles Section*/
@@ -11,6 +17,7 @@
 	width: 200px;
 	height: auto;
 	border: 1px solid black;
+	display: inline-block;
 }
 
 .role-header {
@@ -44,7 +51,7 @@
 	display: inline-block;
 }
 
-#todo-header, #roles h4 {
+#name-header, #todo-header, #roles h4 {
 	text-align: center;
 	line-height: 30px;
 	vertical-align: middle;
