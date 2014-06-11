@@ -1,25 +1,105 @@
+			/*Employee Section*/
 #employees {
 	width: 200px ;
-	/*height: 200px;*/
+	min-height: 150px;
 	border: 1px solid black;	
 	list-style-type: none;
 }
 
-li {
-	width: 180px;
-}
-
+			/*Roles Section*/
 #roles {
 	width: 200px;
+	height: auto;
+	border: 1px solid black;
+}
+
+.role-header {
+	width: 180px;
+	font-size: bold 16px sans-serif;
+	text-align: center;
+	border-bottom: 1px solid black;
+	background-color: #efefef;
+}
+
+#roles ul {
+	width: 180px;
+	min-height: 100px;
+	border: 1px solid red;
+	list-style-type: none;
+	padding: 0px;
+	margin: 10px auto;
+}
+
+.remove {
+	width: 12px;
+	height: 12px;
+	float: right;
+}
+
+			/*To-Do Section*/
+#to-dos {
+	width: 500px;
 	height: auto;
 	border: 1px solid black;
 	display: inline-block;
 }
 
-#roles ul {
-	width: 150px;
-	height: 100px;
+#todo-header, #roles h4 {
+	text-align: center;
+	line-height: 30px;
+	vertical-align: middle;
+	height: 30px;
+	background-color: #ececec;
+	margin: 0px;
+	border-bottom: 1px solid black;
+}
+
+.role-todos {
+	width: 500px;
+	height: auto;
+	outline: 1px solid black;
+	margin: 0px auto;
+	padding-bottom: 5px;
+}
+
+.sub-container {
 	border: 1px solid red;
-	list-style-type: none;
-	/*display: inline-block;*/
+	width: 450px;
+	height: auto;
+	margin: 5px auto;
+	padding: 5px;
+}
+
+#to-dos p {
+	background-color: #ececec;
+	padding: 3px;
+	margin:5px;
+}
+
+.show-hide {
+	width: 15px;
+	height: 15px;
+	float: right;
+	margin-right: 25px;
+}
+
+#to-dos span {	
+	display: inline-block;
+	margin-left: 40%;
+}
+.employee-name {
+	width: auto;
+	height: 20px;
+	text-align: center;
+	border: 1px solid black;
+	display: inline-block;
+}
+
+textarea {
+	width: 300px;
+	height: 60px;
+	vertical-align: middle;
+	margin-left: 20px;
+	text-align: center;
+	font-size: 16px;
 }
