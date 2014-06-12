@@ -13,13 +13,15 @@ var App = {
 	setup : function() {
 		this.addEmployees();
 		this.addRoles();
-		this.addTodos();
-		this.showHideEvent();
-		this.hoverEvent();
-		this.removeEvent();
+		this.bindEvents();
 	},
 
-  // #fix - should be moved to its own scope - App.Employee
+	bindEvents : function() {
+		this.Todo.showHideEvent();
+		this.Role.hoverEvent();
+		this.Role.removeEvent();
+	},
+
 	addEmployees : function() {
 		$(this.seedData["employees"]).each(function(index, name) {
 			var employee = new Employee(name);
@@ -30,36 +32,34 @@ var App = {
 		$(this.seedData["roles"]).each(function(index, role) {
 			var role = new Role(role);
 		});
-	},
+	}
+}
 
-  // #fix - todos should be created on Role init.
-  addTodos : function() {
-    $(this.seedData["roles"]).each(function(index, role) {
-      var todoHeader = new ToDo(role);
-    });
-  },
-
+// event methods on ToDo section
+App.Todo = {
 	// method to show hide the the to do list
 	showHideEvent : function() {
-		$("#to-dos").on("click", "img", function() {
+		$("#to-dos").on("click", "a.show-hide", function() {
 			if($(this).hasClass('minus')) {
-				$("<img>", { class : "plus show-hide", src : "plus-icon.jpg"}).appendTo($(this).parent());
+				$(this).addClass('plus').removeClass('minus').appendTo($(this).parent());
 				$(this).parent().siblings(".sub-container").slideUp(400);
-			} else {
-				$("<img>", { class : "minus show-hide", src : "minus-icon.jpg"}).appendTo($(this).parent());
+			} else if($(this).hasClass('plus')) {
+				$(this).addClass('minus').removeClass('plus').appendTo($(this).parent());
 				$(this).parent().siblings(".sub-container").slideDown(400);
 			}
-			$(this).remove();
 		});
-	},
+	}
+}
 
-	// hover event on the employee names to show the delete option
+// event methods on Role section
+App.Role = {
+	// hover event on the employee names in Role section
 	hoverEvent : function() {
-		$(".ui-droppable").on('mouseenter', 'li:not(:first)', function() {
+		$(".ui-droppable").on('mouseenter', 'li', function() {
 			$(this).children().show();
 		});
 
-		$(".ui-droppable").on('mouseleave', 'li:not(:first)', function() {
+		$(".ui-droppable").on('mouseleave', 'li', function() {
 			$(this).children().hide();
 		})
 	},
@@ -75,7 +75,6 @@ var App = {
 			}
 		});
 	}
-
 }
 
 // Employee Class
@@ -90,11 +89,11 @@ Employee.prototype.init = function() {
 }
 
 Employee.prototype.add = function() {
-	$("<li>", { text : this.name }).attr("data-name", this.name).appendTo($("#employees"));
+	$("<li>", { text : this.name }).attr("data-name", this.name).appendTo($("#employees ul"));
 }
 
 Employee.prototype.draggable = function() {
-	$("#employees li:not(:first)").draggable({
+	$("#employees li").draggable({
 		snap : true,
 		cursor : "move",
 		helper : "clone"
@@ -113,9 +112,11 @@ Role.prototype.init = function() {
 }
 
 Role.prototype.add = function() {
-	$("<ul>").attr("data-role", this.role)
-					 .html($("<li>", { class : 'role-header',text : this.role }))
-					 .appendTo("#roles");
+	var $roleSection = $("<div>");
+	$("<p>", { class : 'role-header',text : this.role }).appendTo($roleSection);
+	$("<ul>").attr("data-role", this.role).appendTo($roleSection);
+	$roleSection.appendTo("#roles");
+	var todoHeader = new ToDo(this.role);
 }
 
 Role.prototype.droppable = function() {
@@ -123,25 +124,28 @@ Role.prototype.droppable = function() {
 	$("#roles ul").droppable({
 		drop : function(event, ui) {
 			if($(this).find($("[data-name='" + ui.draggable.attr("data-name") + "']")).length >=1) { 
-				return false;
+				alert("This Employee is already assigned to this role");
 			} else {
 				var employeeName = ui.draggable.clone()
 																	 		 .attr("data-name", ui.draggable.text())
 																	 		 .appendTo($(this));
 				$("<img>", { class : "remove", src : "cross.png"}).appendTo(employeeName).hide();
-				that.addEmployees($(this), ui.draggable);
+				that.addEmployee($(this), ui.draggable.text());
 			}
 		}
 	}).disableSelection();
 }
 
-// #fix- Instead of ui pass the employee_name as argument.
-Role.prototype.addEmployees = function(obj, ui) {
-	var $div = $("<div>", { class : "sub-container" }).attr("data-name", ui.text());
-		$("<p>", { class : "employee-name", text : ui.text() }).appendTo($div);
-		$("<textarea>", { text : "Add todos for " + ui.text() + " here"}).appendTo($div);
-		var selectorStr = "[data-role = '" + obj.attr("data-role") + "']";
-		$div.appendTo($("div" + selectorStr));
+Role.prototype.addEmployee = function(role, name) {
+	var $div = $("<div>", { class : "sub-container" }).attr("data-name", name);
+		$("<p>", { class : "employee-name", text : name }).appendTo($div);
+		$("<textarea>", { text : "Add todos for " + name + " here"}).appendTo($div);
+		var selectorStr = "[data-role = '" + role.attr("data-role") + "']";
+		if($("div" + selectorStr).find($(".plus")).length) {
+			$div.appendTo($("div" + selectorStr)).hide();
+		} else {
+			$div.appendTo($("div" + selectorStr)).show();
+		}
 }
 
 // class ToDo
@@ -156,7 +160,7 @@ ToDo.prototype.init = function() {
 
 ToDo.prototype.add = function() {
 	$div = $("<div>", { class : 'role-todos'}).attr("data-role", this.role);
-	$("<p>").html("<span>" + this.role +"</span> <img class='minus show-hide' src='minus-icon.jpg'/>").appendTo($div);
+	$("<p>").html("<span>" + this.role +"</span> <a class='minus show-hide'/>").appendTo($div);
 	$div.appendTo("#to-dos");
 }
 
