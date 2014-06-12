@@ -19,6 +19,7 @@ var App = {
 		this.removeEvent();
 	},
 
+  // #fix - should be moved to its own scope - App.Employee
 	addEmployees : function() {
 		$(this.seedData["employees"]).each(function(index, name) {
 			var employee = new Employee(name);
@@ -31,11 +32,12 @@ var App = {
 		});
 	},
 
-	addTodos : function() {
-		$(this.seedData["roles"]).each(function(index, role) {
-			var todoHeader = new ToDo(role);
-		});
-	},
+  // #fix - todos should be created on Role init.
+  addTodos : function() {
+    $(this.seedData["roles"]).each(function(index, role) {
+      var todoHeader = new ToDo(role);
+    });
+  },
 
 	// method to show hide the the to do list
 	showHideEvent : function() {
@@ -107,7 +109,7 @@ function Role(role) {
 
 Role.prototype.init = function() {
 	this.add();
-	this.droppable();		
+	this.droppable();
 }
 
 Role.prototype.add = function() {
@@ -133,6 +135,7 @@ Role.prototype.droppable = function() {
 	}).disableSelection();
 }
 
+// #fix- Instead of ui pass the employee_name as argument.
 Role.prototype.addEmployees = function(obj, ui) {
 	var $div = $("<div>", { class : "sub-container" }).attr("data-name", ui.text());
 		$("<p>", { class : "employee-name", text : ui.text() }).appendTo($div);
