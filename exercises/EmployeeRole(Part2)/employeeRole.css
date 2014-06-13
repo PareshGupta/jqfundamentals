@@ -1,0 +1,242 @@
+#employees, #roles, #to-dos {
+	margin: 10px 20px;
+}
+
+.headers{
+	text-align: center;
+	line-height: 30px;
+	vertical-align: middle;
+	height: 30px;
+	background-color: #ececec;
+	margin: 0px;
+	border-bottom: 1px solid black;
+}
+
+#search-container {
+	position: absolute;
+	left: 50%;
+	top: 20px;
+}
+
+			/*Employee Section*/
+#employees {
+	width: 200px ;
+	min-height: 200px;
+	border: 1px solid black;
+	text-align: center;
+	display: inline-block;
+	position: fixed;
+	top: 50px;
+}
+
+#employees ul {
+	list-style-type: none;
+	padding: 0px;
+	margin: 5px;
+}
+
+#employees ul li {
+	min-width: 100px;
+	margin: 0px auto;
+}
+
+			/*Roles Section*/
+#roles {
+	width: 200px;
+	height: auto;
+	border: 1px solid black;
+	display: inline-block;
+	text-align: center;
+	padding-bottom: 2px;
+}
+
+#roles div {
+	height: auto;
+	margin: 0px;
+	border-bottom: 1px solid black;
+}
+
+.role-header {
+	height: 30px;
+	font-size: 16px;
+	line-height: 30px;
+	border-bottom: 1px solid black;
+	background-color: #efefef;
+	margin: 0px;
+}
+
+#roles ul {
+	min-height: 100px;
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.remove {
+	width: 12px;
+	height: 12px;
+	float: right;
+	background-image: url("cross.png");
+	background-repeat: no-repeat;
+	background-size: 12px;
+}
+
+			/*To-Do Section*/
+#to-dos {
+	width: 500px;
+	height: auto;
+	border: 1px solid black;
+	display: inline-block;
+	position: absolute;
+	left: 500px;
+	top: 50px;
+}
+
+
+.role-todos {
+	width: 500px;
+	height: auto;
+	margin: 2px auto;
+}
+
+.sub-container {
+	height: auto;
+	margin: 0px auto;
+	padding: 5px;
+	border: 1px solid red;
+	margin: 2px;
+}
+
+#to-dos p {
+	background-color: #ececec;
+	line-height: 30px;
+	border-top: 1px solid;
+	border-bottom: 1px solid;	
+	margin: 0px;
+}
+
+.show-hide {
+	width: 15px;
+	height: 15px;
+	float: right;
+	margin-right: 25px;
+	margin-top: 5px;
+}
+
+.minus {
+	background-image: url("minus-icon.jpg");
+	background-repeat: no-repeat;
+	background-size: 15px;
+}
+
+.plus {
+	background-image: url("plus-icon.jpg");
+	background-repeat: no-repeat;
+	background-size: 15px;
+}
+
+.todo-header {	
+	display: inline-block;
+	margin-left: 40%;
+}
+
+#show-todos, #hide-todos {
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	background-size: 20px;
+	background-repeat: no-repeat;
+	float: right;
+	margin-right: 10px;
+}
+
+#show-todos {
+	background-image: url("plus-icon.jpg");
+}
+
+#hide-todos {
+	background-image: url("minus-icon.jpg");
+}
+
+.employee-name {
+	padding: 0px 5px; 
+	border: 1px solid black;
+	display: inline-block;
+	min-width: 100px;
+	text-align: center;
+}
+
+.text {
+	width: 150px;
+}
+
+.todo-container {
+	width: 300px;
+	height: 100px;
+	vertical-align: middle;
+	margin-left: 20px;
+	font-size: 16px;
+	display: inline-block;
+	border: 1px solid #efefef;
+}
+
+.todo-listitem {
+	width: 300px;	
+	margin: 2px auto;
+	padding: 5px 0px;
+}
+
+.add-todos {
+	width: 20px;
+	height: 20px;
+	float: right;
+	background-image: url("plus-icon.jpg");
+	background-size: 20px;
+	background-repeat: no-repeat;
+}
+
+.save, .cancel, .edit, .remove-todo {
+	width: 15px;
+	height: 15px;
+	border: 1px solid black;
+	display: inline-block;
+	line-height: 20px;
+	vertical-align: middle;
+}
+
+.save {
+	background-image: url("Save-icon.png");
+	background-repeat: no-repeat;
+	background-size: 15px;
+	margin: 0px 20px;
+}
+
+.cancel {
+	background-image: url("Cancel.png");
+	background-repeat: no-repeat;
+	background-size: 15px;
+}
+
+.edit {
+	background-image: url("edit.png");
+	background-repeat: no-repeat;
+	background-size: 15px;
+	margin: 0px 20px;	
+}
+
+.remove-todo {
+	background-image: url("cross.png");
+	background-repeat: no-repeat;
+	background-size: 15px;	
+}
+
+.todo-input {
+	width: 150px;
+}
+
+.highlight {
+	background-color: yellow !important;
+	font: bold 18px sans-serif;
+	width:	100px;
+	height: 30px;
+}
