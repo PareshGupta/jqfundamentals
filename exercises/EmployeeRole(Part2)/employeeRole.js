@@ -120,12 +120,19 @@ App.Todo = {
 
 	// method to search the todo list items
 	searchTodo : function() {
+		var Regex = /^[+]?[\w]+/;
 		$('#search').click(function() {
+			var value = $("[type='search']").val();
+			if(!Regex.test(value)) {
+				$(".sub-container").hide();
+				alert("Enter valid characters");
+				return false;
+			}
+
 			if($(".sub-container input").length) {
 				alert("ToDo list cannot be in edit/new state");
 			} else {
 				$(".sub-container").hide();
-				var value = $("[type='search']").val();
 				$(".sub-container:contains(" + value + ")").slideDown(400).siblings().slideDown(400);
 				var $employeeName = $(".sub-container:contains(" + value + ")").find(".employee-name");
 				$employeeName.each(function() {
