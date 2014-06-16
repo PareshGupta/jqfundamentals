@@ -1,0 +1,100 @@
+EXERCISE : Nutrition Calculator
+
+DESCRIPTION : 
+
+  1. The Nutrition Chart has three sections: a. Adult's Menu
+                                             b. Kid's Menu
+                                             c. Nutrition Calculator Table
+                                           
+  2. Adult's Menu has following items:
+      a. BURRITO
+      b. BURRITO BOWL
+      c. TACOS
+      d. SALAD
+      
+  2. Kid's Menu has following items:
+      a. SMALL QUESADILLA MEAL
+      b. SINGLE TACO MEAL
+      c. TWO TACO KIT
+      
+  3. Nutrition Calculator Table has following columns : (Refer screen1.png)
+      a. ITEM (name of respective added item)
+      b. CALORIES
+      c. CAL FROM FAT
+      d. TOTAL FAT(g)
+      e. SATURATED FAT(g)
+      f. TRANS FAT(g)
+      g. CHOLESTEROL(mg)
+      h. SODIUM(mg)
+      i. CARBOHYDRATES(g)
+      j. DIETARY FIBER(g)
+      k. SUGAR(g)
+      l. PROTEIN(g)
+      m. VITAMIN A(%DV)
+      n. VITAMIN C(%DV)
+      o. CALCIUM(%DV)
+      p. IRON(%DV)
+      
+      and a row showing the TOTAL of each column, i.e added values of nutrition.
+      
+  COMMON REQUIREMENTS :
+    1. For all checkbox items : Checking the item will add the item in table. Unchecking the item or
+       clicking on the respective row will remove the item from table and uncheck the same form the menu.
+       
+    2.	On changing the item with radio button, it should REPLACE the item in nutrition table belonging to same radio group.
+      	Since it is radio button, so one item from each radio group should be there in nutrition table.
+      
+    3. Every time section or item changes, nutrition table should be cleared and menu for each item should reset back to initial state,
+       with all the required items pre-selected and and pre populated in nutrition table.
+      
+  ADULT'S SECTION DESCRIPTION : 
+  
+    1. Menu has following items :
+         BURRITO : refer burrito.png
+         BURRITO BOWL : refer burrito_bowl.png
+         TACOS : refer taco.png
+         SALAD : refer salad.png
+   
+    2. Menu has following sections:
+       a. TORTILLAS / LETTUCE (only in case of salad) [Selection in radio box]
+       b. SELECT A MEAT (checkboxes)
+       c. ADDITIONAL OPTIONS (checkboxes)
+       d. ADD CHIPS AND SALSA (checkboxes)
+       
+    3. Following items are pre selected in respective section and data pre fed in nutrition table:
+       a. BURRITO : Flour Tortilla (only item in tortilla section)
+       b. BURRITO BOWL : None (no item in tortilla section)
+       c. TACOS : Crispy Corn Tortilla (out of 3 available choices)
+       d. SALAD : Romaine Lettuce (only item in lettuce section)
+       
+    4. For all meat items : There is a textbox showing servings(1 or 2) and two buttons to add or subtract serving.
+       - refer burrito.png
+       
+    5. Please note : For meat item, clicking any where in the row should remove and uncheck the respective meat item, 
+       but clicking on the "textarea showing serving", "add button" or "subtract button" should not remove the item.
+       
+   KID'S SECTION DESCRIPTION : 
+     1. Menu has following items :
+          SMALL QUESADILLA MEAL  : refer small_meal.png and small_meal_with_meat.png
+          SINGLE TACO MEAL : refer single.png
+          TWO TACO KIT  : refer two.png
+      
+     2. Menu has following sections:
+        ALL 3 ITEMS :
+          a. TORTILLAS [Selection in radio box]
+          b. SELECT A MEAT [Selection in radio box]
+          c. CHIPS [Single radio box] (ALWAYS SELECTED)
+        FOR SINGLE TACO/ TWO TACO ONLY :
+          d. WHAT'INSIDE? (checkboxes) [TWO selections if meat selected from meat section and THREE if no meat selected from meat section]
+          e. CHOOSE A SIDE OF RICE[Selection in radio box]
+        ONLY FOR SMALL QUESADILLA MEAL :
+          f. 1st SIDE [Selection in radio box]
+          g. 2nd SIDE [Selection in radio box]
+        
+
+     3. Following items are pre selected in respective section and data pre fed in nutrition table:
+        a. SMALL QUESADILLA MEAL : Flour Tortilla (only item in tortilla section), No Meat Item, Cheese (enlisted in MEAT section), White Rice,
+                                   Black Beans, Chips 
+        b. SINGLE TACO/ TWO TACO : Crispy Corn Tortilla (out of 3 available choices), No Meat,White Rice,Chips.
+        
+        c. In What's Inside section only two items are allowed if any meat is selected from meat section and THREE if no meat is selected from meat section
