@@ -1,0 +1,40 @@
+body {
+  font: normal 14px sans-serif;
+}
+
+table, tr, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+#tortillas, #meat{
+  border: 1px solid black;
+  min-width: 250px;
+  height: 200px;
+  float: left;
+}
+
+#additionals {
+  width: 300px;
+  min-height: 250px;
+  border: 1px solid black;
+  float: left;
+}
+
+#chips {
+  clear: left;
+  width: 600px;
+  height: 200px;
+  border: 1px solid black;
+}
+.names {
+  display: block;
+}
+
+.item-name {
+  min-width: 100px;
+}
+
+.servings, .add, .sub{
+  width: 20px;
+}
