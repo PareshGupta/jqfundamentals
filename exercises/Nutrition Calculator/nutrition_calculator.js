@@ -28,8 +28,8 @@ var App = {
   },
 
   events : function() {
-    this.Menu.changeEvent();
-    this.Menu.addEvent();
+    this.Menu.changeEventOnMainMenu();
+    this.Menu.changeEventOnCheckboxes();
     this.Menu.changeEventOnRadioButtons();
     this.NutritionTable.removeItem();
     this.NutritionTable.addServing();
@@ -40,7 +40,7 @@ var App = {
 
 App.Menu = {
   // method to change the main menu 
-  changeEvent : function() {
+  changeEventOnMainMenu : function() {
     $("#menu-item").on('change', "[name='item']", function() {
       $("#tortillas").children("div").remove();
       $(".nutrition-values").remove();
@@ -51,17 +51,7 @@ App.Menu = {
       $("input[type='checkbox']").prop('checked', false);
       $("[name='menu']:first").prop('checked', true);
       var name = $("[name='menu']:first").next().text();
-      $row = $("<tr>", {class : 'nutrition-values tacos'}).attr("data-name", name);
-      for(var i = 0; i < App.seedData["nutrition-table"].length; i++) {
-        if(i == 0) {
-          var $item = $("<td>", { class : 'item-name'});
-          $("<span>", {class : 'names'}).text(name).appendTo($item);
-          $item.appendTo($row);
-        } else {
-          $("<td>", {class : i}).text(App.seedData[name][i-1]).attr('data-value', App.seedData[name][i-1]).appendTo($row);
-        }
-      }
-      $row.insertBefore("#total");
+      App.Menu.addingItem(name);
       App.NutritionTable.calculateTotal();
     });
   },
@@ -70,22 +60,27 @@ App.Menu = {
     $('#tortillas').on('change', 'input', function() {
       $("#nutrition-table .tacos").remove();
       var name = $(this).next().text();
-      var $row = $("<tr>", {class : 'nutrition-values tacos'}).attr("data-name", name);
-      for(var i = 0; i < App.seedData["nutrition-table"].length; i++) {
-        if(i == 0) {
-          var $item = $("<td>", { class : 'item-name'});
-          $("<span>", {class : 'names'}).text(name).appendTo($item);
-          $item.appendTo($row);
-        } else {
-          $("<td>", {class : i}).text(App.seedData[name][i-1]).attr('data-value', App.seedData[name][i-1]).appendTo($row);
-        }
-      }
-      $row.insertBefore("#total");
+      App.Menu.addingItem(name);
+      App.NutritionTable.calculateTotal();   
     });
   },
 
+  addingItem : function(name) {
+    var $row = $("<tr>", {class : 'nutrition-values tacos'}).attr("data-name", name);
+    for(var i = 0; i < App.seedData["nutrition-table"].length; i++) {
+      if(i == 0) {
+        var $item = $("<td>", { class : 'item-name'});
+        $("<span>", {class : 'names'}).text(name).appendTo($item);
+        $item.appendTo($row);
+      } else {
+        $("<td>", {class : i}).text(App.seedData[name][i-1]).attr('data-value', App.seedData[name][i-1]).appendTo($row);
+      }
+    }
+    $row.insertBefore("#total");
+  },
+
   // method to add or remove the item from the nutrition table by change event
-  addEvent : function() {
+  changeEventOnCheckboxes : function() {
     $("#main-container").on('change', "input[type='checkbox']", function() {
       var count = 0
       if($(this).prop('checked')) {
@@ -107,11 +102,11 @@ App.Menu = {
           }
         }
         $row.insertBefore("#total");
-        App.NutritionTable.calculateTotal();
       } else {
         var value = $(this).attr("data-name");
         $("#nutrition-table").find("[data-name='" + value + "']").remove();
       }
+      App.NutritionTable.calculateTotal();
     });
   }
 }
