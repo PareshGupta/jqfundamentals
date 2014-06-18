@@ -7,7 +7,7 @@ table, tr, td {
   border-collapse: collapse;
 }
 
-#tortillas, #meat{
+#tortillas, #meat {
   border: 1px solid black;
   min-width: 250px;
   height: 200px;
@@ -27,6 +27,7 @@ table, tr, td {
   height: 200px;
   border: 1px solid black;
 }
+
 .names {
   display: block;
 }

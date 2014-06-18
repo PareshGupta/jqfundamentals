@@ -12,66 +12,62 @@ var App = {
       });
   },
 
-  //fix - rename nutritionTable => buildNutritionTableHeader, events => bindEvents
   setup : function() {
-    this.nutritionTable();
+    this.buildNutritionTableHeader();
     this.setupMenu();
-    this.events();
+    this.bindEvents();
   },
 
-  // fix - class NutritionTable => NutritionItem
-  nutritionTable : function() {
+  buildNutritionTableHeader : function() {
     $(this.seedData['nutrition-table']).each(function(index, name) {
       var nutritionValue = new NutritionTable(name);
     })
   },
 
   setupMenu : function() {
-    var menuItem = new Menu();
-    menuItem.init();
+    Menu.init();
   },
 
-  // fix - seperate out events to Menu and NutritionItem
-  events : function() {
-    this.Menu.changeEventOnMainMenu();
-    this.Menu.changeEventOnCheckboxes();
-    this.Menu.changeEventOnRadioButtons();
-    this.NutritionTable.removeItem();
-    this.NutritionTable.addServing();
-    this.NutritionTable.removeServing();
-  }
+  bindEvents : function() {
+    this.Menu.bindEvents();
+    this.NutritionTable.bindEvents();
+  },
 
+  resetCalculator : function() {
+    $("#tortillas").children("div").remove();
+
+    // clear table
+    $(".nutrition-values").remove();
+
+    // clear selection
+    $("input[type='checkbox']").prop('checked', false);
+  }
 }
 
 App.Menu = {
-  // fix - Extract clear etc, to resetCalculator method.
+  bindEvents : function() {
+    this.changeEventOnMainMenu();
+    this.changeEventOnCheckboxes();
+    this.changeEventOnRadioButtons();
+  },
 
   // method to change the main menu 
   changeEventOnMainMenu : function() {
     $("#menu-item").on('change', "[name='item']", function() {
-
-      $("#tortillas").children("div").remove();
-
-      // clear table
-      $(".nutrition-values").remove();
-
+      App.resetCalculator();
+      
       // get id and build menu
       var value = $(this).attr('id');
       for(var i = 0; i < App.seedData[value].length; i++) {
         $("<div>").html("<input type='radio' name='menu' data-name='" + value.toLowerCase() + "'><span>" + App.seedData[value][i] + "</span>").appendTo("#tortillas");
       }
 
-      // clear selection
-      $("input[type='checkbox']").prop('checked', false);
-
       // select first tortilla
       $("[name='menu']:first").prop('checked', true);
-
+      
       var name = $("[name='menu']:first").next().text();
-
-      // CalculateTotal call within addingItem.
-      App.Menu.addingItem(name);
-      App.NutritionTable.calculateTotal();
+      var $row = $("<tr>", {class : 'nutrition-values tacos'}).attr("data-name", name);
+      App.NutritionTable.addingItem(name, $row);
     });
   },
 
@@ -79,59 +75,54 @@ App.Menu = {
     $('#tortillas').on('change', 'input', function() {
       $("#nutrition-table .tacos").remove();
       var name = $(this).next().text();
-      App.Menu.addingItem(name);
-      App.NutritionTable.calculateTotal();   
+      var $row = $("<tr>", {class : 'nutrition-values tacos'}).attr("data-name", name);
+      App.NutritionTable.addingItem(name, $row);   
     });
   },
 
-  addingItem : function(name) {
-    var $row = $("<tr>", {class : 'nutrition-values tacos'}).attr("data-name", name);
-    for(var i = 0; i < App.seedData["nutrition-table"].length; i++) {
-      if(i == 0) {
-        var $item = $("<td>", { class : 'item-name'});
-        $("<span>", {class : 'names'}).text(name).appendTo($item);
-        $item.appendTo($row);
-      } else {
-        $("<td>", {class : i}).text(App.seedData[name][i-1]).attr('data-value', App.seedData[name][i-1]).appendTo($row);
-      }
-    }
-    $row.insertBefore("#total");
-  },
-
-  // method to add or remove the item from the nutrition table by change event
   changeEventOnCheckboxes : function() {
     $("#main-container").on('change', "input[type='checkbox']", function() {
       var count = 0
       if($(this).prop('checked')) {
         $row = $("<tr>", {class : 'nutrition-values'}).attr("data-name", $(this).attr("data-name"));
         var name = $(this).next().text();
-        for(var i = 0; i < App.seedData["nutrition-table"].length; i++) {
-          if(i == 0) {
-            var $item = $("<td>", { class : 'item-name'});
-            $("<span>", {class : 'names'}).text(name).appendTo($item);
-            $item.appendTo($row);
-            if($(this).parents("#meat").length) {
-              $item.attr('data-item', 'meat');
-              $("<input>", {class : 'servings', type : 'text', value : 1, readonly : 'readonly'}).appendTo($item);
-              $("<button>", {class : 'add', text : '+'}).appendTo($item);
-              $("<button>", {class: 'sub', text : '-'}).appendTo($item);
-            }
-          } else {
-            $("<td>", { class : i}).text(App.seedData[name][i-1]).attr('data-value', App.seedData[name][i-1]).appendTo($row);
-          }
-        }
-        $row.insertBefore("#total");
+        var meatCount = $(this).parents("#meat").length;
+        App.NutritionTable.addingItem(name, $row, meatCount);        
       } else {
         var value = $(this).attr("data-name");
         $("#nutrition-table").find("[data-name='" + value + "']").remove();
       }
-      App.NutritionTable.calculateTotal();
     });
   }
 }
 
 App.NutritionTable = {
-  // method to remove the item from the nutrition table
+  bindEvents : function() {
+    this.removeItem();
+    this.addServing();
+    this.removeServing();
+  },
+
+  addingItem : function(name, row, item) {
+    for(var i = 0; i < App.seedData["nutrition-table"].length; i++) {
+      if(i == 0) {
+        var $item = $("<td>", { class : 'item-name'});
+        $("<span>", {class : 'names'}).text(name).appendTo($item);
+        $item.appendTo(row);
+        if(item) {
+          $item.attr('data-item', 'meat');
+          $("<input>", {class : 'servings', type : 'text', value : 1, readonly : 'readonly'}).appendTo($item);
+          $("<button>", {class : 'add', text : '+'}).appendTo($item);
+          $("<button>", {class: 'sub', text : '-'}).appendTo($item);
+        }
+      } else {
+        $("<td>", {class : i}).text(App.seedData[name][i-1]).attr('data-value', App.seedData[name][i-1]).appendTo(row);
+      }
+    }
+    row.insertBefore("#total");
+    App.NutritionTable.calculateTotal();
+  },
+
   removeItem : function() {
     $("#nutrition-table").on('click', '.nutrition-values td:not([data-item="meat"])', function() {
       var value = $(this).parent().attr("data-name");
@@ -191,64 +182,60 @@ App.NutritionTable = {
 }
 
 // Nutrition Class
-// fix  - rename setup to buildHeader
 function NutritionTable(name) {
   this.name = name;
-  this.setup();
+  this.buildHeader();
 }
 
-NutritionTable.prototype.setup = function() {
+NutritionTable.prototype.buildHeader = function() {
   $("<td>", { text : this.name}).appendTo("#nutrition-value");
 }
 
 // Menu Class
-// fix - rename setup => setupMainMenu
-// fix - Menu should be a literal not a constructor
-
-function Menu() {
-  this.init = function() {
-    this.setup();
+var Menu = {
+  init : function() {
+    this.setupMainMenu();
     this.setupMeatMenu();
     this.setupAdditionalMenu();
     this.setupChipsMenu();
+  },
+
+  setupMainMenu : function() {
+    var menu = App.seedData["menu-item"];
+    for(var i = 0; i < menu.length; i++) {
+      $item = $("<div>").attr("data-item", menu[i]);
+      $("<input>", { id : menu[i], type : 'radio', name : 'item'}).appendTo($item);
+      $("<label>", { for : menu[i], text : menu[i]}).appendTo($item);
+      $item.appendTo("#menu-item");
+    }
+  },
+
+  setupMeatMenu : function() {
+    for(var i = 0; i < App.seedData["meat"].length; i++) {
+      $div = $("<div>");
+      $("<input>", {type : 'checkbox',}).attr("data-name", App.seedData['meat'][i]).appendTo($div);
+      $("<span>", {text : App.seedData['meat'][i]}).appendTo($div);
+      $div.appendTo("#meat");
+    }
+  },
+
+  setupAdditionalMenu : function() {
+    for(var i = 0; i < App.seedData["additional"].length; i++) {
+      $div = $("<div>", {class : 'options'});
+      $("<input>", {type : 'checkbox',}).attr("data-name", App.seedData['additional'][i]).appendTo($div);
+      $("<span>", {text : App.seedData['additional'][i]}).appendTo($div);
+      $div.appendTo("#additionals");
+    } 
+  },
+
+  setupChipsMenu : function() {
+    for(var i = 0; i < App.seedData["chips-salsa"].length; i++) {
+      $div = $("<div>", {class : 'chips'});
+      $("<input>", {type : 'checkbox',}).attr("data-name",App.seedData['chips-salsa'][i]).appendTo($div);
+      $("<span>", {text : App.seedData['chips-salsa'][i]}).appendTo($div);
+      $div.appendTo("#chips");
+    } 
   }
-}
-
-Menu.prototype.setup = function() {
-  var menu = App.seedData["menu-item"];
-  for(var i = 0; i < menu.length; i++) {
-    $item = $("<div>").attr("data-item", menu[i]);
-    $("<input>", { id : menu[i], type : 'radio', name : 'item'}).appendTo($item);
-    $("<label>", { for : menu[i], text : menu[i]}).appendTo($item);
-    $item.appendTo("#menu-item");
-  }
-}
-
-Menu.prototype.setupMeatMenu = function() {
-  for(var i = 0; i < App.seedData["meat"].length; i++) {
-    $div = $("<div>");
-    $("<input>", {type : 'checkbox',}).attr("data-name", App.seedData['meat'][i]).appendTo($div);
-    $("<span>", {text : App.seedData['meat'][i]}).appendTo($div);
-    $div.appendTo("#meat");
-  }
-}
-
-Menu.prototype.setupAdditionalMenu = function() {
-  for(var i = 0; i < App.seedData["additional"].length; i++) {
-    $div = $("<div>", {class : 'options'});
-    $("<input>", {type : 'checkbox',}).attr("data-name", App.seedData['additional'][i]).appendTo($div);
-    $("<span>", {text : App.seedData['additional'][i]}).appendTo($div);
-    $div.appendTo("#additionals");
-  } 
-}
-
-Menu.prototype.setupChipsMenu = function() {
-  for(var i = 0; i < App.seedData["chips-salsa"].length; i++) {
-    $div = $("<div>", {class : 'chips'});
-    $("<input>", {type : 'checkbox',}).attr("data-name",App.seedData['chips-salsa'][i]).appendTo($div);
-    $("<span>", {text : App.seedData['chips-salsa'][i]}).appendTo($div);
-    $div.appendTo("#chips");
-  } 
 }
 
 $(function() {
