@@ -30,6 +30,7 @@ var App = {
   events : function() {
     this.Menu.changeEvent();
     this.Menu.addEvent();
+    this.Menu.changeEventOnRadioButtons();
     this.NutritionTable.removeItem();
     this.NutritionTable.addServing();
     this.NutritionTable.removeServing();
@@ -45,12 +46,12 @@ App.Menu = {
       $(".nutrition-values").remove();
       var value = $(this).attr('id');
       for(var i = 0; i < App.seedData[value].length; i++) {
-        $("<div>").html("<input type='radio' name='menu' data-name='" + value + "'><span>" + App.seedData[value][i] + "</span>").appendTo("#tortillas");
+        $("<div>").html("<input type='radio' name='menu' data-name='" + value.toLowerCase() + "'><span>" + App.seedData[value][i] + "</span>").appendTo("#tortillas");
       }
       $("input[type='checkbox']").prop('checked', false);
       $("[name='menu']:first").prop('checked', true);
       var name = $("[name='menu']:first").next().text();
-      $row = $("<tr>", {class : 'nutrition-values'}).attr("data-name", name);
+      $row = $("<tr>", {class : 'nutrition-values tacos'}).attr("data-name", name);
       for(var i = 0; i < App.seedData["nutrition-table"].length; i++) {
         if(i == 0) {
           var $item = $("<td>", { class : 'item-name'});
@@ -65,9 +66,27 @@ App.Menu = {
     });
   },
 
+  changeEventOnRadioButtons : function() {
+    $('#tortillas').on('change', 'input', function() {
+      $("#nutrition-table .tacos").remove();
+      var name = $(this).next().text();
+      var $row = $("<tr>", {class : 'nutrition-values tacos'}).attr("data-name", name);
+      for(var i = 0; i < App.seedData["nutrition-table"].length; i++) {
+        if(i == 0) {
+          var $item = $("<td>", { class : 'item-name'});
+          $("<span>", {class : 'names'}).text(name).appendTo($item);
+          $item.appendTo($row);
+        } else {
+          $("<td>", {class : i}).text(App.seedData[name][i-1]).attr('data-value', App.seedData[name][i-1]).appendTo($row);
+        }
+      }
+      $row.insertBefore("#total");
+    });
+  },
+
   // method to add or remove the item from the nutrition table by change event
   addEvent : function() {
-    $("#main-container").on('change', "input", function() {
+    $("#main-container").on('change', "input[type='checkbox']", function() {
       var count = 0
       if($(this).prop('checked')) {
         $row = $("<tr>", {class : 'nutrition-values'}).attr("data-name", $(this).attr("data-name"));
