@@ -1,4 +1,6 @@
 var App = {
+  seedData : [],
+
   init : function() {
     $.getJSON("data.json")
       .done(function(data) {
@@ -10,12 +12,14 @@ var App = {
       });
   },
 
+  //fix - rename nutritionTable => buildNutritionTableHeader, events => bindEvents
   setup : function() {
     this.nutritionTable();
     this.setupMenu();
     this.events();
   },
 
+  // fix - class NutritionTable => NutritionItem
   nutritionTable : function() {
     $(this.seedData['nutrition-table']).each(function(index, name) {
       var nutritionValue = new NutritionTable(name);
@@ -27,6 +31,7 @@ var App = {
     menuItem.init();
   },
 
+  // fix - seperate out events to Menu and NutritionItem
   events : function() {
     this.Menu.changeEventOnMainMenu();
     this.Menu.changeEventOnCheckboxes();
@@ -39,18 +44,32 @@ var App = {
 }
 
 App.Menu = {
+  // fix - Extract clear etc, to resetCalculator method.
+
   // method to change the main menu 
   changeEventOnMainMenu : function() {
     $("#menu-item").on('change', "[name='item']", function() {
+
       $("#tortillas").children("div").remove();
+
+      // clear table
       $(".nutrition-values").remove();
+
+      // get id and build menu
       var value = $(this).attr('id');
       for(var i = 0; i < App.seedData[value].length; i++) {
         $("<div>").html("<input type='radio' name='menu' data-name='" + value.toLowerCase() + "'><span>" + App.seedData[value][i] + "</span>").appendTo("#tortillas");
       }
+
+      // clear selection
       $("input[type='checkbox']").prop('checked', false);
+
+      // select first tortilla
       $("[name='menu']:first").prop('checked', true);
+
       var name = $("[name='menu']:first").next().text();
+
+      // CalculateTotal call within addingItem.
       App.Menu.addingItem(name);
       App.NutritionTable.calculateTotal();
     });
@@ -172,6 +191,7 @@ App.NutritionTable = {
 }
 
 // Nutrition Class
+// fix  - rename setup to buildHeader
 function NutritionTable(name) {
   this.name = name;
   this.setup();
@@ -182,6 +202,9 @@ NutritionTable.prototype.setup = function() {
 }
 
 // Menu Class
+// fix - rename setup => setupMainMenu
+// fix - Menu should be a literal not a constructor
+
 function Menu() {
   this.init = function() {
     this.setup();
