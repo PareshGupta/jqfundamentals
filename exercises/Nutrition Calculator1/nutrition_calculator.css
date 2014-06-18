@@ -1,0 +1,66 @@
+body {
+  font: normal 14px sans-serif;
+}
+
+#adult-menu, #kid-menu {
+  width: 150px;
+  height: 30px;
+  border: 1px solid black;
+  background-color: #efefef;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  line-height: 30px;
+}
+
+table, tr, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+#tortillas, #meat {
+  border: 1px solid black;
+  min-width: 250px;
+  height: 200px;
+  float: left;
+}
+
+#additionals {
+  width: 300px;
+  min-height: 250px;
+  border: 1px solid black;
+  float: left;
+}
+
+#chips {
+  clear: left;
+  width: 600px;
+  height: 200px;
+  border: 1px solid black;
+}
+
+.names {
+  display: block;
+}
+
+.item-name {
+  min-width: 100px;
+}
+
+.servings, .add, .sub{
+  width: 20px;
+}
+
+/*KID'S MENU*/
+#tortillas-kid, #meat-kid, #first-side, #second-side {
+  min-width: 200px;
+  min-height: 150px;
+  border: 1px solid black;
+  display: inline-block;
+}
+
+#chip {
+  width: 500px;
+  height: 150px;
+  border: 1px solid black;
+}

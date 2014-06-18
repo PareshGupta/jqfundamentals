@@ -1,0 +1,89 @@
+{ 
+  "nutrition-table" : ["ITEMS", "CALORIES", "CAL FROM FAT", "TOTAL FAT(g)", "SATURATED FAT(g)", "TRANS FAT(g)", "CHOLESTEROL(mg)", "SODIUM(mg)", "CARBOHYDRATES(g)", "DIETARY FIBER(g)", "SUGAR(g)", "PROTEIN(g)", "VITAMIN A(%DV)", "VITAMIN C(%DV)", "CALCIUM(%DV)", "IRON(%DV)"],
+
+  "menu-item" : ["BURRITO", "BURRITO BOWL", "TACOS", "SALAD"],
+
+  "kid-item" : ["SMALL QUESADILLA MEAL", "SINGLE TACO MEAL", "TWO TACO MEAL"],
+
+  "BURRITO" : ["Flour Tortilla"], 
+
+  "BURRITO BOWL" : ["No Tortilla here"],
+
+  "TACOS" : ["Crispy Corn Tortilla", "Soft Corn Tortilla", "Soft Flour Tortilla"],
+
+  "SALAD" : ["ROMAINE LETTUCE"],
+
+  "meat" : ["Chicken", "Steak", "Barbacoa", "Carnitas"],
+
+  "additional" : ["White Rice", "Brown Rice", "Black Beans", "Pinto Beans", "Fajita Vegetables", "Fresh Tomato Salsa", "Vanaigrette", "Tomatillo-Green Chili Salsa", "Tomatillo-Red Chili Salsa", "Sour Cream", "Cheese", "Guacamole", "Romaine Lettuce", "Roasted Chili Corn Salsa"],
+
+  "chips-salsa" : ["Chips", "Chips & Guacamole", "Chips & Tomatillo-Green Chili Salsa", "Chips and Fresh Tomato Salsa", "Chips & Roasted Chili-Corn Salsa", "Chips & Tomatillo-Red Chili Salsa"],
+
+  "Chicken" : [200, 90, 7, 2, 0, 65, 320, 2, 1, 30, 32, 10, 2, 2, 8],
+
+  "Steak" : [200, 90, 6.5, 2, 0, 70, 330, 0, 2, 45, 32, 10, 2, 2, 7],
+
+  "Barbacoa" : [320, 80, 5.5, 2, 0, 65, 360, 1, 3, 45, 32, 19, 1, 1, 5],
+
+  "Carnitas" : [400, 50, 4.5, 1, 0, 45, 370, 3, 3, 30, 34, 20, 2, 2, 4],
+
+  "White Rice" : [300, 240, 27, 1, 29, 40, 390, 8, 30, 34, 20, 2, 2, 18],
+
+  "Brown Rice" : [590, 240, 27, 3.5, 0, 0, 890, 77, 9, 10, 30, 2, 3, 4, 20],
+
+  "Pinto Beans" : [120, 10, 1, 0, 0, 5, 330, 22, 10, 1, 7, 2, 2, 4, 10],
+
+  "Black Beans" : [120, 10, 1, 0, 1, 5, 330, 20, 9, 2, 4, 2, 2, 5, 13],
+
+  "Fajita Vegetables" : [100, 30, 1, 3, 5, 200, 7, 3, 4, 6, 8, 20, 14, 30, 20],
+
+  "Fresh Tomato Salsa" : [100, 30, 2, 4, 5, 200, 3, 2, 9, 4, 12, 30, 3, 13, 20],
+
+  "Vanaigrette" : [200, 20, 3, 4, 5, 150, 20, 9, 5, 8, 9, 30, 15, 30, 20],
+
+  "Tomatillo-Green Chili Salsa" : [200, 20, 1, 3, 4, 200, 30, 3, 45, 20, 11, 3, 20, 30, 12],
+
+  "Tomatillo-Red Chili Salsa" : [200, 20, 1, 3, 4, 200, 30, 3, 45, 20, 11, 3, 20, 30, 12],
+
+  "Sour Cream" : [130, 12, 3, 3, 4, 200, 20, 3, 45, 20, 11, 3, 20, 30, 19],
+
+  "Guacamole" : [120, 10, 1, 0, 1, 5, 330, 20, 9, 2, 4, 2, 2, 5, 13],
+
+  "Cheese" : [450, 30, 5, 6, 130, 30, 10, 7, 10, 4, 15, 40, 19, 50, 30],
+
+  "Romaine Lettuce" : [190, 20, 3, 4, 120, 30, 20, 3, 4, 15, 20, 32, 12, 8, 18],
+
+  "Roasted Chili Corn Salsa" : [100, 30, 2, 4, 5, 200, 3, 2, 9, 4, 12, 30, 3, 13, 20],
+
+  "Chips" : [300, 40, 2, 8, 200, 20, 20, 8, 12, 4, 15, 40, 19, 50, 30],
+
+  "Chips & Guacamole" : [590, 40, 4, 3, 250, 5, 330, 20, 9, 2, 4, 22, 24, 5, 13 ],
+
+  "Chips & Tomatillo-Green Chili Salsa" : [500, 50, 12, 30, 23, 43, 12, 2, 90, 34, 23, 3, 33, 14, 24],
+
+  "Chips and Fresh Tomato Salsa" : [550, 50, 6, 6, 430, 30, 30, 17, 16, 4, 15, 140, 19, 50, 30],
+  
+  "Chips & Roasted Chili-Corn Salsa" : [300, 30, 20, 14, 9, 300, 13, 12, 19, 10, 18, 35, 4, 16, 25],
+
+  "Chips & Tomatillo-Red Chili Salsa" : [400, 20, 10, 4, 3, 100, 30, 13, 43, 20, 21, 13, 20, 30, 22],
+
+  "ROMAINE LETTUCE" : [190, 20, 3, 4, 120, 30, 20, 3, 4, 15, 20, 32, 12, 8, 18],
+
+  "Crispy Corn Tortilla" : [100, 30, 2, 4, 5, 200, 3, 2, 9, 4, 12, 30, 3, 13, 20],
+
+  "Soft Corn Tortilla" : [100, 30, 2, 4, 5, 200, 3, 2, 9, 4, 12, 30, 3, 13, 20],
+
+  "Soft Flour Tortilla" : [100, 30, 1, 3, 5, 200, 7, 3, 4, 6, 8, 20, 14, 30, 20],
+
+  "Flour Tortilla" : [100, 30, 1, 3, 5, 200, 7, 3, 4, 6, 8, 20, 14, 30, 20],
+
+  "meat-kid" : ["No Meat Item","Chicken", "Steak", "Barbacoa", "Carnitas", "Guacamole", "Cheese"],
+
+  "1st-side" : ["White Rice", "Black Rice"],
+
+  "2nd-side" : ["Black Beans", "Pinto Beans"],
+
+  "chip" : ["Chips"]
+
+}
+
