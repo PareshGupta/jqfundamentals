@@ -79,11 +79,17 @@
 
   "meat-kid" : ["No Meat Item","Chicken", "Steak", "Barbacoa", "Carnitas", "Guacamole", "Cheese"],
 
-  "1st-side" : ["White Rice", "Black Rice"],
+  "1st-side" : ["White Rice", "Brown Rice"],
 
   "2nd-side" : ["Black Beans", "Pinto Beans"],
 
-  "chip" : ["Chips"]
+  "chip" : ["Chips"],
+
+  "SMALL QUESADILLA MEAL" : ["Flour Tortilla"],
+
+  "SINGLE TACO MEAL" : ["Crispy Corn Tortilla", "Soft Corn Tortilla", "Soft Flour Tortilla"],
+
+  "TWO TACO MEAL" : ["Crispy Corn Tortilla", "Soft Corn Tortilla", "Soft Flour Tortilla"]
 
 }
 

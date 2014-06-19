@@ -6,11 +6,25 @@ body {
   width: 150px;
   height: 30px;
   border: 1px solid black;
-  background-color: #efefef;
+  /*background-color: #efefef;*/
   display: inline-block;
   text-align: center;
   font-weight: bold;
   line-height: 30px;
+}
+
+#kid-container, #main-container {
+  border: 1px solid red;
+}
+
+
+.background{
+  background-color: gray;
+}
+
+
+#kid-container {
+  display: none;
 }
 
 table, tr, td {
@@ -52,15 +66,24 @@ table, tr, td {
 }
 
 /*KID'S MENU*/
-#tortillas-kid, #meat-kid, #first-side, #second-side {
-  min-width: 200px;
-  min-height: 150px;
+
+#tortillas-kid, #meat-kid, #first-side, #second-side{
+  width: 200px;
+  min-height: 200px;
   border: 1px solid black;
-  display: inline-block;
+  float: left;
 }
 
-#chip {
+#kid-additionals {
+  width: 300px;
+  min-height: 150px;
+  border: 1px solid black;
+  float: left;
+}
+
+#taco-rice, #chip {
   width: 500px;
   height: 150px;
   border: 1px solid black;
+  clear: both;
 }
