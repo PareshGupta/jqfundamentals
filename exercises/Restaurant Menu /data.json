@@ -1,0 +1,44 @@
+{
+  "breads" : ["Wheat", "Multi-Grain", "Honey Oats", "Italian"],
+
+  "vegetables" : ["Italian vegetables", "Chinese vegetables", "Indian vegetables", "Paneer Tikka"],
+
+  "sauces"   : ["Mustard", "Mint-Chutney", "Tomato ketchup", "Mayonnaise"],
+
+  "Wheat" : { "quantity" : 10,
+              "price" : 10 },
+
+  "Multi-Grain" : { "quantity" : 8,
+                    "price" : 15 },
+
+  "Honey Oats" : { "quantity" : 5,
+                   "price" : 20 },
+
+  "Italian" : { "quantity" : 15,
+                "price" : 15 },
+
+  "Italian vegetables" : { "quantity" : 20,
+                            "price" : 40 },
+
+  "Chinese vegetables" : { "quantity" : 15,
+                            "price" : 30 },
+
+  "Indian vegetables" : { "quantity" : 18,
+                          "price" : 35 },
+
+  "Paneer Tikka" : { "quantity" : 20,
+                      "price" : 50 },
+
+  "Mustard" : { "quantity" : 20,
+                "price" : 15 },
+
+  "Mint-Chutney" : { "quantity" : 10,
+                    "price" : 10 },
+
+  "Tomato ketchup" : { "quantity" : 25,
+                    "price" : 15 },
+
+  "Mayonnaise" : { "quantity" : 30,
+                    "price" : 8 }
+
+}

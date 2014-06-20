@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Restaurant Menu</title>
+    <link rel="stylesheet" type="text/css" href="menu.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="menu.js"></script>
+  </head>
+
+  <body>
+    <!-- Placed Order Section -->
+    <div id="placed-order-section">
+      <h4>Order Placed</h4>
+    </div>
+
+    <div id="additionals">
+      <button id="reset">RESET</button>
+      <span>TOTAL SALES:<input id="total-sales" type="text" value="0" readonly="readonly"></span>
+    </div>
+
+    <!-- Menu items -->
+    <div id="menu-container">
+      <h4>Menu Item</h4>
+      <table id="bread-section">
+      <tr>
+        <th>Bread</th>
+      </tr>
+      </table>
+      <table id="vegetable-section">
+        <tr>
+          <th>Vegetable-Stuffing</th>
+        </tr>
+      </table>
+      <table id="sauce-section">
+        <tr>
+          <th>Sauce</th>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Current order section -->
+    <div id="current-order-container">
+      <h4>Current Order</h4>
+      <table id="current-order-section">
+        <tr>
+          <th>Item</th>
+          <th>Price</th>
+        </tr>
+      </table>
+      <div id="total">
+        <span>Total Price:</span>
+        <input id="total-price" type="text" value="Rs 0/-" readonly="readonly">
+      </div>
+      <button id="place-order">Place Order</button>
+    </div>
+
+
+  </body>
+</html>
