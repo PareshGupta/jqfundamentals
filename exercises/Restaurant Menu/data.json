@@ -1,0 +1,21 @@
+ {
+  
+  "Breads" : [{"name" : "Wheat", "quantity" : 10, "price" : 10},
+             {"name" : "Multi-Grain", "quantity" : 8, "price" : 15}, 
+             {"name" : "Honey Oats", "quantity" : 10, "price" : 20},
+             {"name" : "Italian-Bread", "quantity" : 12, "price" : 15}],
+
+  "Vegetables" : [{"name" :"Italian vegetables", "quantity" : 20, "price" : 40},
+                  {"name" : "Chinese vegetables", "quantity" : 30, "price" : 35},
+                  {"name" : "Indian vegetables", "quantity" : 25, "price" : 40},
+                  {"name" : "Paneer Tikka", "quantity" : 20, "price" : 50}],
+
+  "Sauces" : [{"name" : "Mustard", "quantity" : 20, "price" : 15},
+              {"name" : "Mint-Chutney", "quantity" : 15, "price" : 20},
+              {"name" : "Tomato ketchup", "quantity" : 25, "price" : 15},
+              {"name" : "Mayonnaise", "quantity" : 25, "price" : 20}]
+}
+
+
+
+

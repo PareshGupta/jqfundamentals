@@ -1,0 +1,112 @@
+body {
+  font-family: sans-serif;
+}
+
+table, th, td, tr {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+#menu-container table {
+  display: inline-block;
+}
+
+#additionals {
+  width: 300px;
+  margin: 10px auto;
+  padding: 5px;
+}
+
+#additionals input {
+  width: 30px;
+}
+
+/*menu-section*/
+#menu-container {
+  width: 600px;
+  min-height: 400px;
+  border: 1px solid red;
+  text-align: center;
+  /*margin-left: 100px;*/
+  padding-left: 70px;
+}
+
+#menu-container h4 {
+  width: 100px;
+}
+
+.quantity, .price {
+  width: 50px;
+  display: block;
+  margin: 2px auto;
+}
+
+.highlight {
+  background-color: yellow;
+}
+
+/*Current order section*/
+#current-order-container {
+  margin-left: 250px;
+  width: 300px;
+  min-height: 100px;
+  outline: 1px solid red;
+  clear: both;
+  text-align: center;
+}
+
+#current-order-section {
+  /*display: block;*/
+  margin: 10px auto;
+  text-align: center;
+}
+
+#current-order-section th {
+  min-width: 100px;
+}
+
+#total {
+  margin-top: 30px;
+  font-weight: bold;
+}
+
+#total-price {
+  width: 60px;
+}
+
+#place-order {
+  display: block;
+  margin: 10px auto;
+}
+
+/*Placed Order Section*/
+#placed-order-section {
+  width: 400px;
+  height: 400px;
+  outline: 1px solid red;
+  float: right;
+  margin-right: 50px;
+  padding: 5px;
+  text-align: center;
+}
+
+.orders {
+  width: 300px;
+  margin: 5px auto;
+  text-align: center;
+  border: 2px dotted black;
+}
+
+.orders p {
+  font-weight: bold;
+}
+
+.placed-order {
+  font-weight: normal;
+  margin-right: 5px;
+}
+
+.confirm-order-price {
+  width: 50px;
+  font-weight: bold;
+}
